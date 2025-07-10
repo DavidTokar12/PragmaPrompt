@@ -29,6 +29,7 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = ">=3.10,<4.0"
+jinja2 = "^3.1.6"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.7.2"
@@ -72,7 +73,8 @@ ignore = [
     "ERA001",
     "RUF009", # Do not perform function call in dataclass defaults
     "TCH002", # Do not use 'typing.TYPE_CHECKING' in type annotations
-    "TCH001"
+    "TCH001",
+    "TCH003", # Do not use 'typing.TYPE_CHECKING' in imports
 ]
 extend-safe-fixes = [
     "TCH", # move import from and to TYPE_CHECKING blocks
