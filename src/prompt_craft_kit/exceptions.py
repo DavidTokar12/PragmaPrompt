@@ -1,5 +1,3 @@
-"""Custom exceptions for the prompt-craft-kit package."""
-
 from __future__ import annotations
 
 
@@ -13,10 +11,6 @@ class FileNotFoundError(LoaderError):
 
 class ParsingError(LoaderError):
     """Raised when a file cannot be parsed correctly."""
-
-
-class TemplateError(LoaderError):
-    """Raised when template processing fails."""
 
 
 class ConfigurationError(LoaderError):
