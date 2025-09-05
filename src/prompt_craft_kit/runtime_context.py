@@ -97,7 +97,9 @@ def session(
     context: CtxT | None = None,
     render_model: RmT | None = None,
 ) -> Iterator[None]:
+
     token = begin(constants=constants, context=context, render_model=render_model)
+
     try:
         yield
     finally:
@@ -114,6 +116,10 @@ def _state() -> _State[Any, Any, Any]:
 
 
 # -------- simple (untyped) accessors; useful internally --------
+
+
+def is_in_session() -> bool:
+    return _VAR.get() is not None
 
 
 def constants() -> Any:
@@ -143,8 +149,34 @@ def sections() -> list[PromptSection]:
     return list(_state().sections)
 
 
-def join(sep: str = "\n") -> str:
-    return sep.join(sec.body for sec in _state().sections)
+def join_sections(sep: str = "\n", from_index: int = 0) -> str:
+    """
+    Join section bodies with `sep` after normalizing whitespace:
+      - Strip leading/trailing whitespace from each section
+      - For each section, strip leading/trailing whitespace from every line
+      - Drop lines that are empty or whitespace-only
+      - Drop sections that end up empty/whitespace-only after cleaning
+    """
+    processed_sections: list[str] = []
+
+    sections = _state().sections[from_index:]
+
+    for sec in sections:
+        text = sec.body
+        text = text.strip()
+
+        cleaned_lines = []
+        for line in text.splitlines():
+            s = line.strip()
+            if s:
+                cleaned_lines.append(s)
+
+        if cleaned_lines:
+            cleaned_section = "\n".join(cleaned_lines).strip()
+            if cleaned_section:
+                processed_sections.append(cleaned_section)
+
+    return sep.join(processed_sections)
 
 
 # -------- execution stack (for cycle detection) --------

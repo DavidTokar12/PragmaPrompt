@@ -11,7 +11,6 @@ from pydantic import BaseModel
 from prompt_craft_kit.renderers.utils import to_display_block
 
 
-# 1. Define sample structures for testing
 @dataclass
 class SampleDataClass:
     name: str
@@ -23,7 +22,6 @@ class SamplePydanticModel(BaseModel):
     value: int
 
 
-# 2. Create test cases for each input type. The 'expected' string is removed.
 CASES: list[tuple[Any, str, str]] = [
     (
         "This is a plain string.",
@@ -74,15 +72,13 @@ def test_to_display_block(
     """
     out = to_display_block(input_val)
 
-    # The assertion is removed, and we now save the output using the fixtures.
     md_file = write_case_markdown(
         renderer="to_display_block",
         case=case,
-        # Wrap the input for consistent logging
         input_params={"input": input_val},
         output=out,
         expectation=description,
-        review=None,  # No LLM review for this test
+        review=None,
     )
 
     append_results(file=md_file, review=None)

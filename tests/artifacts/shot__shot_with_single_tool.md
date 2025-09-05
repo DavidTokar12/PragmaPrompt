@@ -66,10 +66,4 @@ User: Search for today's top finance news.
 This shot demonstrates a single tool call. Review the 'Tool call chain' formatting, especially indentation and the clarity of the rationale, input, and output.
 
 ## LLM Review
-**Result:** pass
-**Formatting rating:** 9
-
-### Reasoning
-```
-The renderer output matches the expectation for a single tool call. The tool chain is clearly formatted with appropriate tags for each section: <tool_chain>, <tool_step>, <name>, <rationale>, <input>, and <output>. The rationale, input, and output are clearly presented and match the input data. The summary output is also correctly formatted and matches the expected content. Overall, the formatting is clear and adheres to the expected structure.
-```
+**Result:** none

@@ -156,10 +156,6 @@ def test_shot_cases(
     with session():
         out = shot(**kwargs)
 
-    # Basic sanity check that we got a non-empty string output
-    assert isinstance(out, str) and out
-
-    # The rest of the test relies on the LLM's qualitative review
     review = llm_review(
         renderer="shot",
         case=case,

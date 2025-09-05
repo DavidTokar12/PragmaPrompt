@@ -4,9 +4,7 @@ import json
 
 from collections.abc import Callable
 from dataclasses import asdict
-from dataclasses import dataclass
 from dataclasses import is_dataclass
-from enum import Enum
 from pathlib import Path
 from typing import Any
 
@@ -17,28 +15,15 @@ import pytest
 from pydantic import BaseModel
 from pydantic import Field
 
+from tests.review import ResultItem
+from tests.review import Review
+from tests.review import ReviewModule
+from tests.review import ReviewResult
+from tests.review import ReviewUser
+
 
 ARTIFACTS_DIRNAME = "artifacts"
 RESULTS_FILENAME = "results.json"
-
-
-class ReviewResult(str, Enum):
-    PASS = "pass"
-    ROOM_FOR_IMPROVEMENT = "room for improvement"
-    FAIL = "fail"
-
-
-@dataclass
-class Review:
-    result: ReviewResult
-    reasoning: str
-    formatting_rating: int
-
-
-@dataclass
-class ResultItem:
-    file: str
-    review: Review | None
 
 
 def pytest_addoption(parser: pytest.Parser) -> None:
@@ -205,29 +190,28 @@ def llm_review(
         dotenv.load_dotenv()
         client = openai.OpenAI()
 
-        system = (
-            "You are a precise unit test reviewer. "
-            "You must emit JSON that matches the provided Pydantic schema. "
-            "Judge whether 'output' satisfies 'expectation' given 'input'. "
-            "Result meaning: 'pass' (meets expectation), "
-            "'room for improvement' (mostly OK but minor issues), "
-            "'fail' (does not meet expectation). "
-            "Formatting rating is 1-10 (higher is better formatting/clarity)."
+        render_model = ReviewUser(
+            test_case=case,
+            input_params=json.dumps(
+                input_params, ensure_ascii=False, default=_json_serializer
+            ),
+            expectation=expectation,
+            output=output,
         )
-        user_msg = (
-            "Evaluate the renderer output against the expectation.\n"
-            f"Renderer: {renderer}\n"
-            f"Case: {case}\n"
-            f"Input: {json.dumps(input_params, ensure_ascii=False, default=_json_serializer)}\n"
-            f"Output:\n{output}\n"
-            f"Expectation:\n{expectation}\n"
-        )
+
+        with open("user.txt", "w") as f:
+            f.write(ReviewModule.review_user.render(render_model=render_model))
 
         completion = client.chat.completions.parse(
             model=model,
             messages=[
-                {"role": "system", "content": system},
-                {"role": "user", "content": user_msg},
+                {"role": "system", "content": ReviewModule.review_system.render()},
+                {
+                    "role": "user",
+                    "content": ReviewModule.review_user.render(
+                        render_model=render_model
+                    ),
+                },
             ],
             response_format=_ReviewModel,
             temperature=0,

@@ -250,6 +250,7 @@ def render_path(
     Execute the prompt file and return the rendered text.
     Starts/ends a runtime session for this render.
     """
+
     if not file_path.exists() or not file_path.is_file():
         raise FileNotFoundError(f"Prompt file not found: {file_path}")
 
@@ -273,6 +274,7 @@ def render_path_in_current_session(file_path: Path) -> None:
     Execute the prompt (or component) file into the *current* active runtime session.
     Does not start/end a session. Raises RuntimeError if no session is active.
     """
+
     if not file_path.exists() or not file_path.is_file():
         raise FileNotFoundError(f"Prompt file not found: {file_path}")
 

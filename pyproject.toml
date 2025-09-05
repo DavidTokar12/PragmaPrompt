@@ -1,13 +1,15 @@
 [tool.poetry]
 name = "prompt-craft-kit"
 version = "0.1.2"
-description = "A powerful toolkit for building, managing, and composing hierarchical prompts."
+description = "A powerful toolkit for building, managing, and composing hierarchical prompts as code."
 authors = ["David Tokar <1413david@gmail.com>"]
 readme = "README.md"
 license = "MIT"
 repository = "https://github.com/DavidTokar12/PromptCraft"
 homepage = "https://github.com/DavidTokar12/PromptCraft"
 include = ["src/prompt_craft_kit/py.typed"]
+packages = [{include = "prompt_craft_kit", from = "src"}]
+
 
 keywords = [
     "prompt", "llm", "prompt-engineering", "ai", 
@@ -18,7 +20,6 @@ classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
-    "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
@@ -30,7 +31,6 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = ">=3.10,<4.0"
-jinja2 = "^3.1.6"
 pydantic = "^2.11.7"
 prettytable = "^3.16.0"
 
@@ -49,6 +49,7 @@ flake8-force-keyword-arguments = "^2.0.0"
 openai = "^1.102.0"
 dotenv = "^0.9.9"
 pytest-asyncio = "^1.1.0"
+pandas = "^2.3.2"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
@@ -59,7 +60,6 @@ extend-exclude = []
 fix = true
 line-length = 88
 target-version = "py310"
-
 
 [tool.flake8]
 select = ["FKA1"]
@@ -93,6 +93,7 @@ ignore = [
 extend-safe-fixes = [
     "TCH", # move import from and to TYPE_CHECKING blocks
 ]
+
 unfixable = [
     "ERA", # do not autoremove commented out code
 ]
@@ -116,7 +117,6 @@ mypy_path = ["src"]
 namespace_packages = true
 explicit_package_bases = true
 plugins = ["pydantic.mypy"]
-
 
 enable_error_code = [
     "ignore-without-code",

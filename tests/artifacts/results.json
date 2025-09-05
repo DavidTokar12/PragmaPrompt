@@ -3,40 +3,380 @@
     "file": "shot__minimal_shot.md",
     "review": {
       "result": "pass",
-      "reasoning": "The renderer output matches the expectation for a minimal prompt shot. The user message is clearly presented, and the output is encapsulated within appropriate tags, ensuring clarity and simplicity. The formatting is straightforward and meets the requirements for a minimal shot.",
-      "formatting_rating": 9
+      "reasoning": "The prompt is well-structured for LLM readability. It uses clear and minimalistic tags to delineate sections: the user input is prefixed with 'User:', and the output is enclosed within '<output>' tags. This structure is consistent and concise, ensuring that the LLM can easily parse the input and output. There is no unnecessary whitespace, and the format is straightforward, which aligns with the expectations for a minimal prompt shot. The JSON input parameters and test output are correctly formatted, contributing to a clear and efficient structure.",
+      "formatting_rating": 5
     }
   },
   {
     "file": "shot__shot_with_context_and_input.md",
     "review": {
       "result": "pass",
-      "reasoning": "The renderer output correctly formats the input according to the expectation. The user query is clearly separated from the context and input sections, which are enclosed in tags <context> and <input> respectively. The output is also clearly marked with <output> tags. This structured format aligns with the expectation of having distinct sections for context, input, and output, making it easy to read and understand.",
-      "formatting_rating": 9
+      "reasoning": "The prompt is well-structured and formatted for LLM readability. It uses clear XML-like tags to delineate different sections: <context>, <input>, and <output>. This explicit structure aids in parsing and understanding the components of the prompt. The JSON data within the <context> and <input> tags is compact and well-formed, ensuring token efficiency. The use of tags instead of excessive whitespace maintains conciseness and consistency across the prompt. Overall, the formatting is optimal for LLM processing, justifying a high rating.",
+      "formatting_rating": 5
     }
   },
   {
     "file": "shot__shot_with_thought.md",
     "review": {
       "result": "pass",
-      "reasoning": "The renderer output correctly includes the 'Thought' block, which is placed before the 'Output' block. This placement is logical as it represents the thought process before generating the final output. The formatting is clear, with the 'Thought' block enclosed in tags, making it distinct from the 'Output' block. The output also matches the user's request for a short poem about the moon, and the thought process aligns with the themes mentioned.",
-      "formatting_rating": 9
+      "reasoning": "The prompt is well-structured and formatted for LLM readability. The use of XML-like tags for 'thought' and 'output' sections is clear and consistent, making it easy for an LLM to parse. The 'thought' block is correctly placed before the 'output', indicating a logical progression from the user's request to the generated content. The prompt avoids unnecessary whitespace and maintains a concise format, which is efficient for token usage. Overall, the structure is consistent and adheres to the guidelines for LLM readability, justifying a high formatting rating.",
+      "formatting_rating": 5
     }
   },
   {
     "file": "shot__shot_with_single_tool.md",
     "review": {
       "result": "pass",
-      "reasoning": "The renderer output matches the expectation for a single tool call. The tool chain is clearly formatted with appropriate tags for each section: <tool_chain>, <tool_step>, <name>, <rationale>, <input>, and <output>. The rationale, input, and output are clearly presented and match the input data. The summary output is also correctly formatted and matches the expected content. Overall, the formatting is clear and adheres to the expected structure.",
-      "formatting_rating": 9
+      "reasoning": "The prompt is well-structured and formatted for LLM readability. It uses XML-like tags to clearly delineate sections such as 'tool_chain' and 'tool_step', which helps in understanding the flow of the tool call. The JSON within the 'input' and 'output' tags is compact and well-formed, ensuring token efficiency. The rationale, input, and output are clearly separated and consistently formatted, which aids in maintaining clarity. The use of minimal whitespace and consistent formatting conventions throughout the prompt justifies a high formatting rating.",
+      "formatting_rating": 5
     }
   },
   {
     "file": "shot__complex_tool_chain_shot.md",
     "review": {
-      "result": "room for improvement",
-      "reasoning": "The renderer output is mostly aligned with the expectation, but there are a few areas that could be improved for better clarity and consistency:\n\n1. **Formatting Consistency**: The `<thought>` tag in the first tool step is not properly closed (it should be `</thought>` instead of `<thought>`). This is a minor formatting error that affects the consistency of the XML-like structure.\n\n2. **Output Consistency**: The final output section provides a more detailed summary and additional key takeaways compared to the tool output. While this might be intentional to reflect a more comprehensive final answer, it would be clearer if the transformation from tool output to final output was explicitly justified or explained in the thought process.\n\n3. **Readability**: The use of XML-like tags is clear, but the readability could be enhanced by ensuring consistent indentation and spacing, especially within the `<tool_chain>` section.\n\nOverall, the structure is well-organized, and the components are logically connected, but attention to detail in formatting and consistency would improve the output.",
-      "formatting_rating": 7
+      "result": "pass",
+      "reasoning": "The prompt is well-structured and formatted for LLM readability. It uses clear sectioning with XML-like tags for different components such as context, tool_chain, and output. Each tool step is consistently formatted with <name>, <rationale>, <input>, <output>, and <thought> tags, ensuring clarity and uniformity. JSON data is compact and well-formed, with no unnecessary whitespace, making it token-efficient. The overall structure is logical, with a clear flow from user input to tool execution and final output. This consistency and conciseness justify a high formatting rating.",
+      "formatting_rating": 5
     }
+  },
+  {
+    "file": "table__mappings_to_pretty.md",
+    "review": {
+      "result": "pass",
+      "reasoning": "The prompt is well-structured for LLM readability. It uses XML-like tags to clearly delineate sections such as <test_case>, <test_input_params>, <test_expectation>, and <test_output>. This explicit structure aids in parsing and understanding the components of the test. The JSON format for input parameters is compact and well-formed, ensuring token efficiency. The test expectation and output are concise and directly related to the input, maintaining consistency across the sections. Overall, the formatting is clear, consistent, and efficient, justifying a high rating.",
+      "formatting_rating": 5
+    }
+  },
+  {
+    "file": "table__mappings_to_csv.md",
+    "review": {
+      "result": "pass",
+      "reasoning": "The prompt is well-structured and concise, using XML-like tags to clearly delineate sections such as <test_case>, <test_input_params>, <test_expectation>, and <test_output>. This structure is consistent and easy for an LLM to parse. The JSON format for input parameters is compact and correctly formed, ensuring efficient token usage. The CSV output is presented in a standard format, with headers inferred from the dictionary keys, which aligns with the expectation. Overall, the formatting is optimal for LLM readability, justifying a high rating.",
+      "formatting_rating": 5
+    }
+  },
+  {
+    "file": "table__sequence_to_pretty.md",
+    "review": {
+      "result": "pass",
+      "reasoning": "The prompt is well-structured for LLM readability. It uses XML-like tags to clearly delineate sections such as <test_case>, <test_input_params>, <test_expectation>, and <test_output>. This explicit structure aids in parsing and understanding the components of the test. The JSON format for input parameters is compact and well-formed, ensuring efficient token usage. The test expectation and output are concise and directly related to the input, maintaining consistency across the sections. Overall, the formatting is clear, consistent, and optimized for LLM processing, justifying a high rating.",
+      "formatting_rating": 5
+    }
+  },
+  {
+    "file": "table__sequence_to_csv.md",
+    "review": {
+      "result": "pass",
+      "reasoning": "The prompt is well-structured for LLM readability. It uses XML-like tags to clearly delineate sections such as <test_case>, <test_input_params>, <test_expectation>, and <test_output>. This explicit structure aids in parsing and understanding the components of the test. The JSON format for input parameters is compact and well-formed, ensuring token efficiency. The CSV output is presented without unnecessary whitespace, maintaining conciseness. Overall, the formatting is consistent and adheres to the guidelines for LLM readability, justifying a high rating.",
+      "formatting_rating": 5
+    }
+  },
+  {
+    "file": "table__csv_string_to_pretty.md",
+    "review": {
+      "result": "pass",
+      "reasoning": "The prompt is well-structured for LLM readability. It uses XML-like tags to clearly delineate sections such as <test_case>, <test_input_params>, <test_expectation>, and <test_output>. This explicit structure aids in parsing and understanding the components of the test. The JSON format for input parameters is compact and well-formed, ensuring efficient token usage. The test output is presented in a concise and consistent tabular format, which aligns with the expectation of a 'pretty' table. Overall, the formatting is consistent and efficient, justifying a high rating.",
+      "formatting_rating": 5
+    }
+  },
+  {
+    "file": "table__csv_string_to_csv.md",
+    "review": {
+      "result": "pass",
+      "reasoning": "The prompt is well-structured and uses XML-like tags to clearly delineate sections such as the test case, input parameters, expectation, and output. This structure is consistent and concise, making it easy for an LLM to parse and understand the different components. The use of JSON for input parameters is appropriate and correctly formatted. The CSV output is presented in a compact form without unnecessary whitespace, which is efficient for token usage. Overall, the formatting is consistent and adheres to the guidelines for LLM readability, justifying a high rating.",
+      "formatting_rating": 5
+    }
+  },
+  {
+    "file": "table__mappings_to_pretty.md",
+    "review": {
+      "result": "pass",
+      "reasoning": "The prompt is well-structured for LLM readability. It uses XML-like tags to clearly delineate sections such as <test_case>, <test_input_params>, <test_expectation>, and <test_output>. This explicit structure aids in parsing and understanding the components of the test. The JSON format for input parameters is compact and well-formed, ensuring token efficiency. The test expectation and output are concise and directly related to the input, maintaining consistency across the sections. Overall, the formatting is clear, consistent, and efficient, justifying a high rating.",
+      "formatting_rating": 5
+    }
+  },
+  {
+    "file": "table__mappings_to_csv.md",
+    "review": {
+      "result": "pass",
+      "reasoning": "The prompt is well-structured and concise, using XML-like tags to clearly delineate sections such as the test case, input parameters, expectation, and output. The JSON format for input parameters is compact and correctly formed, ensuring token efficiency. The CSV output is presented in a standard format, with headers inferred from the dictionary keys, which aligns with the test expectation. Overall, the structure is consistent and clear, making it easy for an LLM to parse and understand the task and expected output.",
+      "formatting_rating": 5
+    }
+  },
+  {
+    "file": "table__sequence_to_pretty.md",
+    "review": {
+      "result": "pass",
+      "reasoning": "The prompt is well-structured for LLM readability. It uses XML-like tags to clearly delineate sections such as <test_case>, <test_input_params>, <test_expectation>, and <test_output>. This explicit structure aids in parsing and understanding the components of the test. The JSON format for input parameters is compact and well-formed, ensuring efficient token usage. The test expectation and output are clearly defined, with the output formatted as a table, which is consistent with the expectation. Overall, the formatting is concise, consistent, and well-suited for LLM processing, justifying a high rating.",
+      "formatting_rating": 5
+    }
+  },
+  {
+    "file": "table__sequence_to_csv.md",
+    "review": {
+      "result": "pass",
+      "reasoning": "The prompt is well-structured for LLM readability. It uses XML-like tags to clearly delineate sections such as <test_case>, <test_input_params>, <test_expectation>, and <test_output>. This explicit structure aids in parsing and understanding the components of the test. The JSON format for input parameters is compact and well-formed, ensuring token efficiency. The CSV output is presented without unnecessary whitespace, maintaining conciseness. Overall, the formatting is consistent and adheres to the guidelines for LLM readability, justifying a high rating.",
+      "formatting_rating": 5
+    }
+  },
+  {
+    "file": "table__csv_string_to_pretty.md",
+    "review": {
+      "result": "pass",
+      "reasoning": "The prompt is well-structured for LLM readability. It uses XML-like tags to clearly delineate sections such as <test_case>, <test_input_params>, <test_expectation>, and <test_output>. This explicit structure aids in parsing and understanding the components of the test. The JSON format for input parameters is compact and well-formed, ensuring token efficiency. The use of a table format in the output is consistent with the expectation of a 'pretty' format, and the alignment of columns is clear without excessive whitespace. Overall, the prompt maintains consistency and conciseness, justifying a high formatting rating.",
+      "formatting_rating": 5
+    }
+  },
+  {
+    "file": "table__csv_string_to_csv.md",
+    "review": {
+      "result": "pass",
+      "reasoning": "The prompt is well-structured and uses XML-like tags to clearly delineate sections such as <test_case>, <test_input_params>, <test_expectation>, and <test_output>. This structure is consistent and compact, making it easy for an LLM to parse and understand. The JSON format used in <test_input_params> is correct and concise, and the CSV format in <test_output> is standard and matches the expectation. There is no unnecessary whitespace, and the overall format is consistent and efficient for LLM processing. Therefore, the formatting rating is justified as a 5.",
+      "formatting_rating": 5
+    }
+  },
+  {
+    "file": "table__dataframe_to_pretty.md",
+    "review": {
+      "result": "pass",
+      "reasoning": "The prompt is well-structured and concise, using XML-like tags to clearly delineate sections such as <test_case>, <test_input_params>, <test_expectation>, and <test_output>. This structure is consistent and easy for an LLM to parse. The JSON format for input parameters is compact and correctly formed, ensuring efficient token usage. The test output is presented in a simple table format, which is appropriate for the context and maintains consistency with the expectation description. Overall, the formatting is clear, consistent, and efficient, justifying a high rating.",
+      "formatting_rating": 5
+    }
+  },
+  {
+    "file": "table__dataframe_to_csv.md",
+    "review": {
+      "result": "pass",
+      "reasoning": "The prompt is well-structured for LLM readability. It uses XML-like tags to clearly delineate sections such as the test case, input parameters, expectation, and output. The JSON format for input parameters is compact and well-formed, ensuring token efficiency. The CSV output is presented in a straightforward manner, consistent with the expectation. Overall, the structure is concise and consistent, justifying a high formatting rating.",
+      "formatting_rating": 5
+    }
+  },
+  {
+    "file": "to_display_block__plain_string_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__json_string_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__dataclass_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__pydantic_model_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__dict_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__json_object_input.md",
+    "review": null
+  },
+  {
+    "file": "shot__minimal_shot.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_context_and_input.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_thought.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_single_tool.md",
+    "review": null
+  },
+  {
+    "file": "shot__complex_tool_chain_shot.md",
+    "review": null
+  },
+  {
+    "file": "table__mappings_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__mappings_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__sequence_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__sequence_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__csv_string_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__csv_string_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__dataframe_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__dataframe_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__plain_string_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__json_string_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__dataclass_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__pydantic_model_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__dict_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__json_object_input.md",
+    "review": null
+  },
+  {
+    "file": "shot__minimal_shot.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_context_and_input.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_thought.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_single_tool.md",
+    "review": null
+  },
+  {
+    "file": "shot__complex_tool_chain_shot.md",
+    "review": null
+  },
+  {
+    "file": "table__mappings_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__mappings_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__sequence_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__sequence_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__csv_string_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__csv_string_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__dataframe_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__dataframe_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__plain_string_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__json_string_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__dataclass_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__pydantic_model_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__dict_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__json_object_input.md",
+    "review": null
+  },
+  {
+    "file": "shot__minimal_shot.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_context_and_input.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_thought.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_single_tool.md",
+    "review": null
+  },
+  {
+    "file": "shot__complex_tool_chain_shot.md",
+    "review": null
+  },
+  {
+    "file": "table__mappings_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__mappings_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__sequence_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__sequence_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__csv_string_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__csv_string_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__dataframe_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__dataframe_to_csv.md",
+    "review": null
   }
 ]

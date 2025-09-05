@@ -22,16 +22,16 @@ JsonObj = Mapping[str, object]
 
 
 @overload
-def output_format() -> str: ...
-@overload
 def output_format(data: JsonObj) -> str: ...
 @overload
 def output_format(data: BaseModel) -> str: ...
 @overload
 def output_format(data: DataclassInstance) -> str: ...
+
+
 @render_function(Renderers.OUTPUT_FORMAT)
 def output_format(
-    data: JsonObj | BaseModel | DataclassInstance | None = None,
+    data: JsonObj | BaseModel | DataclassInstance,
 ) -> str:
     """
     Render an output format instance as pretty JSON.

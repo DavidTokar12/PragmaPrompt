@@ -1,16 +1,22 @@
 from __future__ import annotations
 
+import sys
+
 from collections.abc import Iterator
 from pathlib import Path
 from typing import Any
 from typing import Generic
 from typing import TypeVar
 from typing import cast
+from typing import get_origin
+from typing import get_type_hints
 
 from prompt_craft_kit.exceptions import ConfigurationError
 from prompt_craft_kit.render_engine import render_path
 from prompt_craft_kit.render_engine import render_path_in_current_session
 from prompt_craft_kit.runtime_context import context as rt_context
+from prompt_craft_kit.runtime_context import is_in_session
+from prompt_craft_kit.runtime_context import join_sections as rt_join
 from prompt_craft_kit.runtime_context import render_model as rt_render_model
 from prompt_craft_kit.runtime_context import sections as rt_sections
 
@@ -18,55 +24,6 @@ from prompt_craft_kit.runtime_context import sections as rt_sections
 CnsT = TypeVar("CnsT")
 CtxT = TypeVar("CtxT")
 RM = TypeVar("RM")
-
-
-# -------------------------- Shared base --------------------------
-
-
-class _BaseModule(Generic[CnsT]):
-    """
-    Common module base: validates/normalizes module_dir and binds owned items.
-    """
-
-    module_dir: Path | str
-    constants: CnsT = None  # type: ignore[assignment]
-
-    __module_dir_path: Path | None = None
-
-    @classmethod
-    def module_dir_path(cls) -> Path:
-
-        if cls.__module_dir_path is None:
-            raise ConfigurationError(f"{cls.__name__}: module_dir_path not set")
-
-        return Path(cls.__module_dir_path)
-
-    def __init_subclass__(cls) -> None:
-
-        if cls.__name__ == "PromptModule" or cls.__name__ == "ComponentModule":
-            return
-
-        if not hasattr(cls, "module_dir"):
-            raise ConfigurationError(f"{cls.__name__}: missing 'module_dir' Path")
-
-        if not isinstance(cls.module_dir, Path | str):
-            raise ConfigurationError(
-                f"{cls.__name__}: 'module_dir' must be pathlib.Path or str"
-            )
-
-        if isinstance(cls.module_dir, str):
-            cls.module_dir = Path(cls.module_dir).resolve()
-
-        cls.__module_dir_path = cls.module_dir
-
-        if not cls.module_dir.is_dir() or not cls.module_dir.exists():
-            raise ConfigurationError(
-                f"{cls.__name__}: module_dir does not exist or is not a directory: {cls.module_dir}"
-            )
-
-        for attr_name, attr_value in cls.__dict__.items():
-            if isinstance(attr_value, _BaseItem):
-                attr_value._late_init(owner=cls, attr_name=attr_name)
 
 
 class _BaseItem:
@@ -83,57 +40,117 @@ class _BaseItem:
         self._file_path: Path | None = None
         self._owner: type[_BaseModule[Any]] | None = None
 
-    # Bound from module __init_subclass__
     def _late_init(self, owner: type[_BaseModule[Any]], attr_name: str) -> None:
+        """Called by the module's __init_subclass__ to bind this item to its owner."""
         self._owner = owner
         self._attr = attr_name
         self._set_file_name()
         self._set_path()
 
     def _set_file_name(self) -> None:
-
+        """Determine the final filename, defaulting to the attribute name."""
         if self._filename is None:
             self._filename = f"{self._ensure_attr()}.py"
             return
-
         if not self._filename.endswith(".py"):
             self._filename = f"{self._filename}.py"
-            return
 
     def _set_path(self) -> None:
-        _owner = self._ensure_owner()
+        """Resolve the full, absolute path to the item's file."""
+        owner = self._ensure_owner()
         filename = self._filename or f"{self._ensure_attr()}.py"
+        path = (owner.module_dir_path() / filename).resolve()
 
-        _path = (_owner.module_dir_path() / filename).resolve()
+        if not path.is_file():
+            raise FileNotFoundError(f"Prompt file not found at expected path: {path}")
 
-        if not _path.exists() or not _path.is_file():
-            raise FileNotFoundError(f"Prompt file not found: {_path}")
-
-        self._file_path = _path
+        self._file_path = path
 
     def _ensure_owner(self) -> type[_BaseModule[Any]]:
         if self._owner is None:
-            raise ConfigurationError(
-                "Item has no owner module; use a module-bound alias or pass owner=..."
-            )
+            raise ConfigurationError("Item has no owner module.")
         return self._owner
 
     def _ensure_attr(self) -> str:
         if self._attr is None:
-            raise ConfigurationError(
-                "Item has no attribute name; use a module-bound alias or pass attr_name=..."
-            )
+            raise ConfigurationError("Item has no attribute name.")
         return self._attr
 
     def _ensure_path(self) -> Path:
         if self._file_path is None:
-            raise ConfigurationError(
-                "Item has no file path; use a module-bound alias or pass owner=... and attr_name=..."
-            )
+            raise ConfigurationError("Item has no file path.")
         return self._file_path
 
 
-# -------------------------- Prompts --------------------------
+def _is_item_annotation(tp) -> bool:
+    origin = get_origin(tp) or tp
+    return isinstance(origin, type) and issubclass(origin, _BaseItem)
+
+
+class _BaseModule(Generic[CnsT]):
+    """
+    Common module base: validates/normalizes module_dir and binds owned items.
+    """
+
+    module_dir: Path | None = None
+    constants: CnsT = None  # type: ignore[assignment]
+    __module_dir_path: Path | None = None
+
+    @classmethod
+    def module_dir_path(cls) -> Path:
+        if cls.__module_dir_path is None:
+            # This should be unreachable if __init_subclass__ runs correctly.
+            raise ConfigurationError(f"{cls.__name__}: module_dir_path not set")
+        return cls.__module_dir_path
+
+    def __init_subclass__(cls) -> None:
+        # Avoid running this logic on the abstract base classes themselves
+        if cls.__name__ in ("PromptModule", "ComponentModule", "_BaseModule"):
+            return
+
+        path_source: Path
+        if cls.module_dir is not None:
+            path_source = Path(cls.module_dir)
+        else:
+            try:
+                module = sys.modules[cls.__module__]
+                if not hasattr(module, "__file__") or module.__file__ is None:
+                    raise AttributeError
+                path_source = Path(module.__file__).parent
+            except (KeyError, AttributeError) as e:
+                raise ConfigurationError(
+                    f"{cls.__name__}: could not automatically determine 'module_dir'. "
+                    "Please set it explicitly on t he class."
+                ) from e
+
+        resolved_path = path_source.resolve()
+        if not resolved_path.is_dir():
+            raise ConfigurationError(
+                f"{cls.__name__}: resolved module_dir is not a valid directory: {resolved_path}"
+            )
+
+        cls.module_dir = resolved_path
+        cls.__module_dir_path = resolved_path
+
+        hints = get_type_hints(cls)
+
+        for attr_name, hint in hints.items():
+            if not _is_item_annotation(hint):
+                continue
+
+            origin = get_origin(hint) or hint
+            inst = getattr(cls, attr_name, None)
+
+            if not isinstance(inst, _BaseItem):
+                inst = origin()
+                setattr(cls, attr_name, inst)
+
+            if getattr(inst, "_owner", None) is None:
+                inst._late_init(owner=cls, attr_name=attr_name)
+
+        for attr_name, value in cls.__dict__.items():
+            if isinstance(value, _BaseItem):
+                value._late_init(owner=cls, attr_name=attr_name)
 
 
 class PromptModule(_BaseModule[CnsT], Generic[CnsT]):
@@ -170,6 +187,14 @@ class Prompt(_BaseItem, Generic[CtxT, RM]):
     def render(
         self, *, context: CtxT | None = None, render_model: RM | None = None
     ) -> str:
+
+        in_session = is_in_session()
+
+        if in_session:
+            raise RuntimeError(
+                "Rendering prompts inside other prompts is not allowed! Use a component instead."
+            )
+
         owner = self._ensure_owner()
         path = self._ensure_path()
 
@@ -210,17 +235,12 @@ class Component(_BaseItem):
         owner = self._ensure_owner()
         path = self._ensure_path()
 
-        # Try executing into an active session (append sections in-place).
-        # If no active session, render standalone.
         try:
             before = rt_sections()
             render_path_in_current_session(path)
-            after = rt_sections()
-            # Compute only the newly-added section bodies
             idx = len(before)
-            return "\n".join(sec.body for sec in after[idx:])
+            return rt_join(from_index=idx)
         except RuntimeError:
-            # No active session; run standalone with constants-only
             return render_path(
                 path,
                 constants=getattr(owner, "constants", None),
