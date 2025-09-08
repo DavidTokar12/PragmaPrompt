@@ -75,13 +75,11 @@ CASES = [
                     name="web_search",
                     rationale="The user is asking for current news, so I need to use the web search tool.",
                     input=SearchQuery(query="top finance news today"),
-                    output=[
-                        SearchResult(
-                            url="news.com/1",
-                            title="Market Hits New High",
-                            snippet="...",
-                        )
-                    ],
+                    output=SearchResult(
+                        url="news.com/1",
+                        title="Market Hits New High",
+                        snippet="...",
+                    ),
                 )
             ],
             "output": {
@@ -104,13 +102,11 @@ CASES = [
                     input=SearchQuery(
                         query="TechCorp latest quarterly earnings report"
                     ),
-                    output=[
-                        SearchResult(
-                            url="investors.techcorp.com/q3-2025-earnings",
-                            title="TechCorp Reports Q3 2025",
-                            snippet="...",
-                        )
-                    ],
+                    output=SearchResult(
+                        url="investors.techcorp.com/q3-2025-earnings",
+                        title="TechCorp Reports Q3 2025",
+                        snippet="...",
+                    ),
                     thought="The first result is the official source. I will use this.",
                 ),
                 ToolStep(
@@ -145,9 +141,9 @@ def test_shot_cases(
     kwargs: dict[str, Any],
     description: str,
     case: str,
-    llm_review: Callable,
-    write_case_markdown: Callable,
-    append_results: Callable,
+    llm_review: Callable[..., Any],
+    write_case_markdown: Callable[..., Any],
+    append_results: Callable[..., Any],
 ) -> None:
     """
     Tests the shot renderer with progressively complex scenarios,

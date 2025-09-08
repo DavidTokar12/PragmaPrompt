@@ -18,13 +18,11 @@
         "query": "TechCorp latest quarterly earnings report",
         "domain": "finance"
       },
-      "output": [
-        {
-          "url": "investors.techcorp.com/q3-2025-earnings",
-          "title": "TechCorp Reports Q3 2025",
-          "snippet": "..."
-        }
-      ],
+      "output": {
+        "url": "investors.techcorp.com/q3-2025-earnings",
+        "title": "TechCorp Reports Q3 2025",
+        "snippet": "..."
+      },
       "thought": "The first result is the official source. I will use this."
     },
     {
@@ -60,56 +58,66 @@
 
 User: Please find the latest quarterly earnings report for 'TechCorp' and provide a summary with key takeaways.
 
-<context>
+<CONTEXT>
 {
   "username": "analyst_jane",
   "expertise_level": "expert"
 }
-</context>
+</CONTEXT>
 
-<tool_chain>
-<tool_step>
-<name>web_search</name>
-<rationale>I need to find the official press release.</rationale>
-<input>
+<TOOL_CHAIN>
+<TOOL_STEP>
+<NAME>
+web_search
+</NAME>
+<RATIONALE>
+I need to find the official press release.
+</RATIONALE>
+<INPUT>
 {
   "query": "TechCorp latest quarterly earnings report",
   "domain": "finance"
 }
-</input>
-<output>
-[
-  {
-    "url": "investors.techcorp.com/q3-2025-earnings",
-    "title": "TechCorp Reports Q3 2025",
-    "snippet": "..."
-  }
-]
-</output>
-<thought>The first result is the official source. I will use this.</thought>
-</tool_step>
-<tool_step>
-<name>summarize_document</name>
-<rationale>Now I will summarize the document to extract key points.</rationale>
-<input>
+</INPUT>
+<OUTPUT>
+{
+  "url": "investors.techcorp.com/q3-2025-earnings",
+  "title": "TechCorp Reports Q3 2025",
+  "snippet": "..."
+}
+</OUTPUT>
+<THOUGHT>
+The first result is the official source. I will use this.
+</THOUGHT>
+</TOOL_STEP>
+<TOOL_STEP>
+<NAME>
+summarize_document
+</NAME>
+<RATIONALE>
+Now I will summarize the document to extract key points.
+</RATIONALE>
+<INPUT>
 {
   "url": "investors.techcorp.com/q3-2025-earnings"
 }
-</input>
-<output>
+</INPUT>
+<OUTPUT>
 {
   "summary": "Strong earnings driven by cloud division.",
   "takeaways": [
     "Revenue hit $50B."
   ]
 }
-</output>
-</tool_step>
-</tool_chain>
+</OUTPUT>
+</TOOL_STEP>
+</TOOL_CHAIN>
 
-<thought>The tool chain was successful. I will format the final answer.</thought>
+<THOUGHT>
+The tool chain was successful. I will format the final answer.
+</THOUGHT>
 
-<output>
+<OUTPUT>
 {
   "summary": "TechCorp reported record revenue of $50 billion in Q3 2025, fueled by its cloud services division.",
   "key_takeaways": [
@@ -118,7 +126,7 @@ User: Please find the latest quarterly earnings report for 'TechCorp' and provid
   ],
   "confidence_score": 0.95
 }
-</output>
+</OUTPUT>
 ```
 
 ## Expectation

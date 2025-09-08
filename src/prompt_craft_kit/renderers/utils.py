@@ -6,17 +6,10 @@ from collections.abc import Mapping
 from dataclasses import asdict
 from dataclasses import is_dataclass
 from typing import Any
-from typing import Protocol
 
 from pydantic import BaseModel
 
-
-class DataclassInstance(Protocol):
-    __dataclass_fields__: Mapping[str, object]
-
-
-JsonObj = Mapping[str, object]
-LlmResponseLike = JsonObj | BaseModel | DataclassInstance | str
+from prompt_craft_kit.renderers.types import LlmResponseLike
 
 
 def _to_plain_obj(x: Any) -> Any:
@@ -26,9 +19,9 @@ def _to_plain_obj(x: Any) -> Any:
     """
     if isinstance(x, BaseModel):
         return x.model_dump()
-    if is_dataclass(x):
+    if is_dataclass(x) and not isinstance(x, type):
         return asdict(x)
-    if isinstance(x, list | tuple):
+    if isinstance(x, (list, tuple)):
         return [_to_plain_obj(item) for item in x]
     if isinstance(x, Mapping):
         return {k: _to_plain_obj(v) for k, v in x.items()}

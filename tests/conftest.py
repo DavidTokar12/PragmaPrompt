@@ -66,7 +66,7 @@ def _json_serializer(obj: Any) -> Any:
     """
     if isinstance(obj, BaseModel):
         return obj.model_dump()
-    if is_dataclass(obj):
+    if is_dataclass(obj) and not isinstance(obj, type):
         return asdict(obj)
     raise TypeError(f"Object of type {type(obj).__name__} is not JSON serializable")
 

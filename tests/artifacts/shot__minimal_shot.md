@@ -13,7 +13,9 @@
 ```
 User: What is the capital of Switzerland?
 
-<output>Bern</output>
+<OUTPUT>
+Bern
+</OUTPUT>
 ```
 
 ## Expectation

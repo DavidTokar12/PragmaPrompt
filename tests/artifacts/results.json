@@ -378,5 +378,917 @@
   {
     "file": "table__dataframe_to_csv.md",
     "review": null
+  },
+  {
+    "file": "to_display_block__plain_string_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__json_string_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__dataclass_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__pydantic_model_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__dict_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__json_object_input.md",
+    "review": null
+  },
+  {
+    "file": "shot__minimal_shot.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_context_and_input.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_thought.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_single_tool.md",
+    "review": null
+  },
+  {
+    "file": "shot__complex_tool_chain_shot.md",
+    "review": null
+  },
+  {
+    "file": "table__mappings_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__mappings_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__sequence_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__sequence_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__csv_string_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__csv_string_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__dataframe_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__dataframe_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__plain_string_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__json_string_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__dataclass_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__pydantic_model_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__dict_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__json_object_input.md",
+    "review": null
+  },
+  {
+    "file": "shot__minimal_shot.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_context_and_input.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_thought.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_single_tool.md",
+    "review": null
+  },
+  {
+    "file": "shot__complex_tool_chain_shot.md",
+    "review": null
+  },
+  {
+    "file": "table__mappings_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__mappings_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__sequence_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__sequence_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__csv_string_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__csv_string_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__dataframe_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__dataframe_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__plain_string_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__json_string_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__dataclass_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__pydantic_model_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__dict_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__json_object_input.md",
+    "review": null
+  },
+  {
+    "file": "shot__minimal_shot.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_context_and_input.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_thought.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_single_tool.md",
+    "review": null
+  },
+  {
+    "file": "shot__complex_tool_chain_shot.md",
+    "review": null
+  },
+  {
+    "file": "table__mappings_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__mappings_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__sequence_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__sequence_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__csv_string_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__csv_string_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__dataframe_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__dataframe_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__plain_string_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__json_string_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__dataclass_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__pydantic_model_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__dict_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__json_object_input.md",
+    "review": null
+  },
+  {
+    "file": "shot__minimal_shot.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_context_and_input.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_thought.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_single_tool.md",
+    "review": null
+  },
+  {
+    "file": "shot__complex_tool_chain_shot.md",
+    "review": null
+  },
+  {
+    "file": "table__mappings_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__mappings_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__sequence_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__sequence_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__csv_string_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__csv_string_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__dataframe_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__dataframe_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__plain_string_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__json_string_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__dataclass_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__pydantic_model_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__dict_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__json_object_input.md",
+    "review": null
+  },
+  {
+    "file": "shot__minimal_shot.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_context_and_input.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_thought.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_single_tool.md",
+    "review": null
+  },
+  {
+    "file": "shot__complex_tool_chain_shot.md",
+    "review": null
+  },
+  {
+    "file": "table__mappings_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__mappings_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__sequence_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__sequence_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__csv_string_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__csv_string_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__dataframe_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__dataframe_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__plain_string_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__json_string_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__dataclass_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__pydantic_model_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__dict_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__json_object_input.md",
+    "review": null
+  },
+  {
+    "file": "shot__minimal_shot.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_context_and_input.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_thought.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_single_tool.md",
+    "review": null
+  },
+  {
+    "file": "shot__complex_tool_chain_shot.md",
+    "review": null
+  },
+  {
+    "file": "table__mappings_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__mappings_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__sequence_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__sequence_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__csv_string_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__csv_string_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__dataframe_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__dataframe_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__plain_string_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__json_string_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__dataclass_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__pydantic_model_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__dict_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__json_object_input.md",
+    "review": null
+  },
+  {
+    "file": "shot__minimal_shot.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_context_and_input.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_thought.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_single_tool.md",
+    "review": null
+  },
+  {
+    "file": "shot__complex_tool_chain_shot.md",
+    "review": null
+  },
+  {
+    "file": "table__mappings_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__mappings_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__sequence_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__sequence_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__csv_string_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__csv_string_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__dataframe_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__dataframe_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__plain_string_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__json_string_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__dataclass_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__pydantic_model_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__dict_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__json_object_input.md",
+    "review": null
+  },
+  {
+    "file": "shot__minimal_shot.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_context_and_input.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_thought.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_single_tool.md",
+    "review": null
+  },
+  {
+    "file": "shot__complex_tool_chain_shot.md",
+    "review": null
+  },
+  {
+    "file": "table__mappings_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__mappings_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__sequence_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__sequence_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__csv_string_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__csv_string_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__dataframe_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__dataframe_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__plain_string_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__json_string_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__dataclass_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__pydantic_model_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__dict_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__json_object_input.md",
+    "review": null
+  },
+  {
+    "file": "shot__minimal_shot.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_context_and_input.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_thought.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_single_tool.md",
+    "review": null
+  },
+  {
+    "file": "shot__complex_tool_chain_shot.md",
+    "review": null
+  },
+  {
+    "file": "table__mappings_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__mappings_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__sequence_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__sequence_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__csv_string_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__csv_string_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__dataframe_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__dataframe_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__plain_string_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__json_string_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__dataclass_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__pydantic_model_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__dict_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__json_object_input.md",
+    "review": null
+  },
+  {
+    "file": "shot__minimal_shot.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_context_and_input.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_thought.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_single_tool.md",
+    "review": null
+  },
+  {
+    "file": "shot__complex_tool_chain_shot.md",
+    "review": null
+  },
+  {
+    "file": "table__mappings_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__mappings_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__sequence_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__sequence_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__csv_string_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__csv_string_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__dataframe_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__dataframe_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__plain_string_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__json_string_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__dataclass_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__pydantic_model_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__dict_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__json_object_input.md",
+    "review": null
+  },
+  {
+    "file": "shot__minimal_shot.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_context_and_input.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_thought.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_single_tool.md",
+    "review": null
+  },
+  {
+    "file": "shot__complex_tool_chain_shot.md",
+    "review": null
+  },
+  {
+    "file": "table__mappings_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__mappings_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__sequence_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__sequence_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__csv_string_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__csv_string_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__dataframe_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__dataframe_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__plain_string_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__json_string_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__dataclass_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__pydantic_model_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__dict_input.md",
+    "review": null
+  },
+  {
+    "file": "to_display_block__json_object_input.md",
+    "review": null
+  },
+  {
+    "file": "shot__minimal_shot.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_context_and_input.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_thought.md",
+    "review": null
+  },
+  {
+    "file": "shot__shot_with_single_tool.md",
+    "review": null
+  },
+  {
+    "file": "shot__complex_tool_chain_shot.md",
+    "review": null
+  },
+  {
+    "file": "table__mappings_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__mappings_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__sequence_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__sequence_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__csv_string_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__csv_string_to_csv.md",
+    "review": null
+  },
+  {
+    "file": "table__dataframe_to_pretty.md",
+    "review": null
+  },
+  {
+    "file": "table__dataframe_to_csv.md",
+    "review": null
   }
 ]

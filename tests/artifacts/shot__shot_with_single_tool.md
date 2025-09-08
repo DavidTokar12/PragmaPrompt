@@ -13,13 +13,11 @@
         "query": "top finance news today",
         "domain": "finance"
       },
-      "output": [
-        {
-          "url": "news.com/1",
-          "title": "Market Hits New High",
-          "snippet": "..."
-        }
-      ],
+      "output": {
+        "url": "news.com/1",
+        "title": "Market Hits New High",
+        "snippet": "..."
+      },
       "thought": null
     }
   ],
@@ -33,33 +31,35 @@
 ```
 User: Search for today's top finance news.
 
-<tool_chain>
-<tool_step>
-<name>web_search</name>
-<rationale>The user is asking for current news, so I need to use the web search tool.</rationale>
-<input>
+<TOOL_CHAIN>
+<TOOL_STEP>
+<NAME>
+web_search
+</NAME>
+<RATIONALE>
+The user is asking for current news, so I need to use the web search tool.
+</RATIONALE>
+<INPUT>
 {
   "query": "top finance news today",
   "domain": "finance"
 }
-</input>
-<output>
-[
-  {
-    "url": "news.com/1",
-    "title": "Market Hits New High",
-    "snippet": "..."
-  }
-]
-</output>
-</tool_step>
-</tool_chain>
+</INPUT>
+<OUTPUT>
+{
+  "url": "news.com/1",
+  "title": "Market Hits New High",
+  "snippet": "..."
+}
+</OUTPUT>
+</TOOL_STEP>
+</TOOL_CHAIN>
 
-<output>
+<OUTPUT>
 {
   "summary": "The market reached a new high today, driven by tech stocks."
 }
-</output>
+</OUTPUT>
 ```
 
 ## Expectation

@@ -11,8 +11,8 @@ from prompt_craft_kit.runtime_context import session
 CASES: list[tuple[dict[str, Any], str, str, str]] = [
     (
         {"body": "The system is overheating.", "level": 1},
-        "A level 1 warning should use a simple <warning> tag.",
-        "<warning>The system is overheating.</warning>",
+        "A level 1 warning should use a simple <WARNING> tag with newline-wrapped content.",
+        "<WARNING>\nThe system is overheating.\n</WARNING>",
         "level_1_default_tag",
     ),
     (
@@ -21,16 +21,18 @@ CASES: list[tuple[dict[str, Any], str, str, str]] = [
             "level": 2,
             "title": "Expiration Notice",
         },
-        "A level 2 warning should use an <important-warning> tag with a title.",
-        "<important-warning>Expiration Notice: API keys will expire in 24 hours.</important-warning>",
+        "A level 2 warning should use an <IMPORTANT-WARNING> tag with a title and newline-wrapped content.",
+        "<IMPORTANT-WARNING>\nExpiration Notice: API keys will expire in 24 hours.\n</IMPORTANT-WARNING>",
         "level_2_custom_title_tag",
     ),
     (
         {"body": "Do not output any personal identifying information.", "level": 3},
-        "A level 3 warning should use a <critical-warning> tag with a hard requirement.",
+        "A level 3 warning should use a <CRITICAL-WARNING> tag with a hard requirement and newline-wrapped content.",
         (
-            "<critical-warning>HARD REQUIREMENT: You must follow the instruction below exactly.\n"
-            "Do not output any personal identifying information.</critical-warning>"
+            "<CRITICAL-WARNING>\n"
+            "HARD REQUIREMENT: You must follow the instruction below exactly.\n"
+            "Do not output any personal identifying information.\n"
+            "</CRITICAL-WARNING>"
         ),
         "level_3_critical_tag",
     ),

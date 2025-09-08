@@ -2,19 +2,19 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 from dataclasses import dataclass
-from typing import overload
 
 from prompt_craft_kit.renderers.render_function import render_function
-from prompt_craft_kit.renderers.renderers import Renderers
-from prompt_craft_kit.renderers.utils import LlmResponseLike
+from prompt_craft_kit.renderers.types import LlmResponseLike
 from prompt_craft_kit.renderers.utils import to_display_block
 
 
 @dataclass(frozen=True)
 class ToolStep:
+    """A single tool call step, for inclusion in a tool chain."""
+
     name: str
     rationale: str | None = None
-    input: LlmResponseLike | None = None
+    input: LlmResponseLike | None = None  # (RENAME: clearer than 'input')
     output: LlmResponseLike | None = None
     thought: str | None = None
 
@@ -23,87 +23,81 @@ def tool_step(
     name: str,
     *,
     rationale: str | None = None,
-    input: LlmResponseLike | None = None,
+    input: LlmResponseLike | None = None,  # Back-compat alias (deprecated)
+    tool_input: LlmResponseLike | None = None,
     output: LlmResponseLike | None = None,
     thought: str | None = None,
 ) -> ToolStep:
+    """Helper to construct a :class:`ToolStep`.
+
+    Args:
+        name: Tool name.
+        rationale: Optional rationale for invoking the tool.
+        input: Deprecated alias of ``tool_input`` (kept for backward compatibility).
+        tool_input: Input provided to the tool (preferred name).
+        output: Tool output.
+        thought: Optional thought/comment associated with this step.
+    """
+    if tool_input is None:
+        tool_input = input
     return ToolStep(
         name=name,
         rationale=rationale,
-        input=input,
+        input=tool_input,
         output=output,
         thought=thought,
     )
 
 
-# --- Helper functions for programmatic rendering ---
-
-
 def _render_tagged_block(tag: str, content: LlmResponseLike) -> str:
-    """Renders content inside XML-style tags."""
-    formatted_content = to_display_block(content)
-    if "\n" in formatted_content:
-        return f"<{tag}>\n{formatted_content}\n</{tag}>"
-    return f"<{tag}>{formatted_content}</{tag}>"
+    """Renders content inside XML-style tags with unified formatting."""
+    t = tag.upper()
+    formatted = to_display_block(content)
+    return f"<{t}>\n{formatted}\n</{t}>"
 
 
 def _render_tool_step(step: ToolStep) -> str:
     """Renders a single tool step with all its components."""
-    parts = ["<tool_step>"]
-    parts.append(f"<name>{step.name}</name>")
+    parts = ["<TOOL_STEP>"]
+    parts.append(_render_tagged_block("name", step.name))
     if step.rationale:
-        parts.append(f"<rationale>{step.rationale}</rationale>")
+        parts.append(_render_tagged_block("rationale", step.rationale))
     if step.input is not None:
         parts.append(_render_tagged_block("input", step.input))
     if step.output is not None:
         parts.append(_render_tagged_block("output", step.output))
     if step.thought:
-        parts.append(f"<thought>{step.thought}</thought>")
-    parts.append("</tool_step>")
+        parts.append(_render_tagged_block("thought", step.thought))
+    parts.append("</TOOL_STEP>")
     return "\n".join(parts)
 
 
-# --- Main renderer function (No Jinja2) ---
-
-
-@overload
-def shot(*, user: str, output: LlmResponseLike) -> str: ...
-
-
-@overload
-def shot(
-    *, user: str, output: LlmResponseLike, input: LlmResponseLike | None = ...
-) -> str: ...
-
-
-@overload
-def shot(
-    *,
-    title: str | None = ...,
-    context: LlmResponseLike | None = ...,
-    user: str,
-    input: LlmResponseLike | None = ...,
-    tools: Sequence[ToolStep] = ...,
-    thought: str | None = ...,
-    output: LlmResponseLike,
-) -> str: ...
-
-
-@render_function(Renderers.SHOT)
+@render_function("shot")
 def shot(
     *,
     title: str | None = None,
     context: LlmResponseLike | None = None,
     user: str,
-    input: LlmResponseLike | None = None,
+    input: LlmResponseLike | None = None,  # Back-compat alias
     tools: Sequence[ToolStep] = (),
     thought: str | None = None,
     output: LlmResponseLike,
 ) -> str:
+    """Render a single **few-shot example** with optional context, tools, and thoughts.
+
+    Args:
+        title: Optional heading for the example.
+        context: Optional context block.
+        user: The user message (plain string is fine).
+        input: Deprecated alias of ``model_input``; kept for backward compatibility.
+        tools: Zero or more tool steps that were executed.
+        thought: Optional chain-of-thought style comment (if you deliberately include it).
+        output: The expected/target assistant output.
+
+    Returns:
+        A formatted example block suitable for inclusion in prompts.
     """
-    Renders a single shot (example) by programmatically building the string.
-    """
-    main_parts = []
+    main_parts: list[str] = []
 
     if title:
         main_parts.append(f"### {title}")
@@ -118,11 +112,10 @@ def shot(
 
     if tools:
         tool_steps_str = "\n".join(_render_tool_step(step) for step in tools)
-        main_parts.append(f"<tool_chain>\n{tool_steps_str}\n</tool_chain>")
+        main_parts.append(f"<TOOL_CHAIN>\n{tool_steps_str}\n</TOOL_CHAIN>")
 
     if thought:
         main_parts.append(_render_tagged_block("thought", thought))
 
     main_parts.append(_render_tagged_block("output", output))
-
     return "\n\n".join(main_parts)

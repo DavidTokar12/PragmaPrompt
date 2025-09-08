@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections.abc import Callable
 from typing import Any
 
-import pandas as pd
+import pandas as pd  # type: ignore[import-untyped]
 import pytest
 
 from prompt_craft_kit import table
@@ -86,9 +86,9 @@ def test_table_cases(
     kwargs: dict[str, Any],
     description: str,
     case: str,
-    llm_review: Callable,
-    write_case_markdown: Callable,
-    append_results: Callable,
+    llm_review: Callable[..., Any],
+    write_case_markdown: Callable[..., Any],
+    append_results: Callable[..., Any],
 ) -> None:
     """
     Tests the table renderer with various data sources and output formats,
@@ -97,7 +97,7 @@ def test_table_cases(
     with session():
         out = table(**kwargs)
 
-    assert isinstance(out, str) and out
+    assert out
 
     loggable_kwargs = kwargs.copy()
     if isinstance(loggable_kwargs.get("rows"), pd.DataFrame):

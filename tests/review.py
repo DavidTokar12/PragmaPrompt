@@ -38,5 +38,5 @@ class ReviewUser:
 class ReviewModule(PromptModule[None]):
     module_dir = Path(__file__).parent
 
-    review_system: Prompt = Prompt(filename="review_system")
+    review_system: Prompt[None, None] = Prompt(filename="review_system")
     review_user: Prompt[None, ReviewUser]

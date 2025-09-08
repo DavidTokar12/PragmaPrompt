@@ -21,21 +21,23 @@
 ```
 User: What's the outlook for this company?
 
-<context>
+<CONTEXT>
 {
   "username": "investor_bob",
   "expertise_level": "beginner"
 }
-</context>
+</CONTEXT>
 
-<input>
+<INPUT>
 {
   "company_ticker": "TCORP",
   "timeframe": "6 months"
 }
-</input>
+</INPUT>
 
-<output>The outlook is positive, but volatile.</output>
+<OUTPUT>
+The outlook is positive, but volatile.
+</OUTPUT>
 ```
 
 ## Expectation

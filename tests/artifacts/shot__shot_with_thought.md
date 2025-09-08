@@ -14,13 +14,15 @@
 ```
 User: Write a short poem about the moon.
 
-<thought>The user wants a poem. I will think about themes like light, night, and loneliness. I will structure it in three short stanzas.</thought>
+<THOUGHT>
+The user wants a poem. I will think about themes like light, night, and loneliness. I will structure it in three short stanzas.
+</THOUGHT>
 
-<output>
+<OUTPUT>
 Silver orb in velvet night,
 A silent watchman, pure and bright,
 Guiding sailors with its light.
-</output>
+</OUTPUT>
 ```
 
 ## Expectation

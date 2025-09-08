@@ -63,8 +63,8 @@ def test_to_display_block(
     input_val: Any,
     description: str,
     case: str,
-    write_case_markdown: Callable,
-    append_results: Callable,
+    write_case_markdown: Callable[..., Any],
+    append_results: Callable[..., Any],
 ) -> None:
     """
     Tests that to_display_block correctly formats various input types

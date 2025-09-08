@@ -12,4 +12,4 @@ class ImportComponentModule(ComponentModule[None]):
 
 
 class ImportPromptModule(PromptModule[None]):
-    prompt_1: Prompt
+    prompt_1: Prompt[None, None]

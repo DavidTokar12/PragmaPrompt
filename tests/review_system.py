@@ -19,7 +19,7 @@ pck.warning(body="Optimize for LLM readability over human readability.")
 ## What “readability” means for LLMs
 """
 
-pck.kv(
+pck.bullets(
     items=[
         (
             "whitespace",

@@ -5,5 +5,5 @@ from prompt_craft_kit import PromptModule
 
 
 class ImportPromptModule(PromptModule[None]):
-    prompt_1: Prompt
-    prompt_2: Prompt
+    prompt_1: Prompt[None, None]
+    prompt_2: Prompt[None, None]

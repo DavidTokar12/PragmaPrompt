@@ -82,7 +82,7 @@ class _BaseItem:
         return self._file_path
 
 
-def _is_item_annotation(tp) -> bool:
+def _is_item_annotation(tp: Any) -> bool:
     origin = get_origin(tp) or tp
     return isinstance(origin, type) and issubclass(origin, _BaseItem)
 

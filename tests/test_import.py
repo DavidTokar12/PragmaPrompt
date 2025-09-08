@@ -12,7 +12,7 @@ from tests.includes.rendering_components_and_prompts.module import (
 )
 
 
-def test_circular_import_1_fail():
+def test_circular_import_1_fail() -> None:
 
     with pytest.raises(LoaderError):
         CircularImportModule.component_1.render()
@@ -21,7 +21,7 @@ def test_circular_import_1_fail():
         CircularImportModule.component_2.render()
 
 
-def test_import():
+def test_import() -> None:
 
     prompt = ImportPromptModule1.prompt_1.render()
 
@@ -30,14 +30,7 @@ def test_import():
     assert "component 2" in prompt
 
 
-def test_importing_prompt_fails():
+def test_importing_prompt_fails() -> None:
 
     with pytest.raises(LoaderError):
         ImportPromptModule2.prompt_1.render()
-
-
-# test for invalid section opening/closing
-
-# test for loading every component and rendering it
-
-# multi threaded tests

@@ -1,13 +1,28 @@
 from __future__ import annotations
 
 from prompt_craft_kit.renderers.render_function import render_function
-from prompt_craft_kit.renderers.renderers import Renderers
 
 
-@render_function(Renderers.CODE)
-def code_block(code: str, lang: str) -> str:
+@render_function("code")
+def code_block(source: str, lang: str | None = None) -> str:
+    """Render a fenced Markdown code block.
+
+    Args:
+        source: Code text to include inside the fence.
+        lang: Optional language tag (e.g., "python"). If omitted, a plain
+            fenced block is emitted.
+
+    Returns:
+        Markdown fenced code block.
+
+    Examples:
+        >>> code_block("print('hi')", "python")
+        '```python\\nprint(\\'hi\\')\\n```'
     """
-    Fenced code block (Markdown).
-    """
-    fence = "```" + (lang)
-    return f"{fence}\n{code}\n```"
+    # Basic guard: if source already contains a closing fence, fall back to a longer fence
+    fence = "```" + (lang or "")
+    close = "```"
+    if "```" in source:
+        fence = "````" + (lang or "")
+        close = "````"
+    return f"{fence}\n{source}\n{close}"

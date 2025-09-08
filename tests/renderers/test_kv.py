@@ -4,7 +4,7 @@ from typing import Any
 
 import pytest
 
-from prompt_craft_kit import kv
+from prompt_craft_kit import bullets
 from prompt_craft_kit.runtime_context import session
 
 
@@ -26,22 +26,36 @@ CASES: list[tuple[dict[str, Any], str, str, str]] = [
         "- system: You are a helpful assistant.\n- user: Please summarize this document.",
         "list_of_tuples_input",
     ),
+    (
+        {
+            "items": [
+                "Discussion",
+                "Unpopular Opinion",
+                "Serious",
+                "Satire",
+                "Debate",
+            ]
+        },
+        "Should render a plain list of values as a bullet list.",
+        "- Discussion\n- Unpopular Opinion\n- Serious\n- Satire\n- Debate",
+        "plain_list_input",
+    ),
 ]
 
 
 @pytest.mark.parametrize(
     "kwargs, description, expected, case", CASES, ids=[c[-1] for c in CASES]
 )
-def test_kv_cases(
+def test_bullets_cases(
     kwargs: dict[str, Any],
     description: str,
     expected: str,
     case: str,
 ) -> None:
     """
-    Tests the kv function for both dictionary and list inputs by comparing
+    Tests the bullets function for both dictionary and list inputs by comparing
     the output to an exact expected string.
     """
     with session(constants=None, context=None, render_model=None):
-        out = kv(**kwargs)
+        out = bullets(**kwargs)
         assert out == expected
