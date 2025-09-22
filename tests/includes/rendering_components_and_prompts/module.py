@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from prompt_craft_kit import Component
-from prompt_craft_kit import ComponentModule
-from prompt_craft_kit import Prompt
-from prompt_craft_kit import PromptModule
+from pragma_prompt import Component
+from pragma_prompt import ComponentModule
+from pragma_prompt import Prompt
+from pragma_prompt import PromptModule
 
 
 class ImportComponentModule(ComponentModule[None]):

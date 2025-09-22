@@ -8,7 +8,7 @@ import pytest
 
 from pydantic import BaseModel
 
-from prompt_craft_kit.renderers.utils import to_display_block
+from pragma_prompt.renderers.utils import to_display_block
 
 
 @dataclass

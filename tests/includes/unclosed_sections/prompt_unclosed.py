@@ -1,13 +1,13 @@
 from __future__ import annotations
 
-import prompt_craft_kit as pck
+import pragma_prompt as pp
 
 
 """
 intro
 """
 
-pck.section_start("alpha")
+pp.section_start("alpha")
 
 """
 content without closing

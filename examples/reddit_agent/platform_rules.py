@@ -1,13 +1,13 @@
 from __future__ import annotations
 
-import prompt_craft_kit as pck
+import pragma_prompt as pp
 
 
 """
 # Platform rules and constraints.
 """
 
-pck.warning(
+pp.warning(
     body=(
         "Follow subreddit rules. Be transparent. Do not impersonate users.\n"
         "No personal data, no medical/financial/legal claims."
@@ -16,8 +16,8 @@ pck.warning(
     title="Reddit Safety & Policy",
 )
 
-with pck.section("formatting_rules"):
-    pck.bullets(
+with pp.section("formatting_rules"):
+    pp.bullets(
         {
             "links": "Use bare URLs or Reddit-friendly Markdown.",
             "format": "Title ≤ 300 chars, body as Markdown.",

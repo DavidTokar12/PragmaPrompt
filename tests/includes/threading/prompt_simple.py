@@ -1,11 +1,11 @@
 from __future__ import annotations
 
-import prompt_craft_kit as pck
+import pragma_prompt as pp
 
 
 """
 threaded test
 """
 
-with pck.section("data"):
+with pp.section("data"):
     f"{40 + 2}"

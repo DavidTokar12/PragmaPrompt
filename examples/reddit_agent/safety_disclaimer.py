@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-import prompt_craft_kit as pck
+import pragma_prompt as pp
 
 
 # A short, high-priority guardrail (level=3 adds an explicit hard requirement)
-pck.warning(
+pp.warning(
     body=(
         "Do not fabricate facts or statistics. Cite or say 'can't verify'.\n"
         "No harassment, hate, or personal attacks under any circumstances."

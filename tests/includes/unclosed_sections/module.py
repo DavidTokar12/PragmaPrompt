@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from prompt_craft_kit import Prompt
-from prompt_craft_kit import PromptModule
+from pragma_prompt import Prompt
+from pragma_prompt import PromptModule
 
 
 class UnclosedModule(PromptModule[None]):

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pytest
 
-from prompt_craft_kit.exceptions import LoaderError
+from pragma_prompt.exceptions import LoaderError
 from tests.includes.circular_import_fail_1.module import CircularImportModule
 from tests.includes.including_prompt_fail.module import (
     ImportPromptModule as ImportPromptModule2,

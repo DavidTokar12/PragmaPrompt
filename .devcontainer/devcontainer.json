@@ -1,5 +1,5 @@
 {
-    "name": "prompt-craft-poetry-pyenv",
+    "name": "pragma-prompt-poetry-pyenv",
     "build": {
         "dockerfile": "Dockerfile"
     },

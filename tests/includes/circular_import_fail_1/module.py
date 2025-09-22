@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from prompt_craft_kit import Component
-from prompt_craft_kit import ComponentModule
+from pragma_prompt import Component
+from pragma_prompt import ComponentModule
 
 
 class CircularImportModule(ComponentModule[None]):

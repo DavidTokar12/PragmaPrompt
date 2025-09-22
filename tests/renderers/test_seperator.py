@@ -4,8 +4,8 @@ from typing import Any
 
 import pytest
 
-from prompt_craft_kit import separator
-from prompt_craft_kit.runtime_context import session
+from pragma_prompt import separator
+from pragma_prompt.runtime_context import session
 
 
 CASES: list[tuple[dict[str, Any], str, str, str]] = [

@@ -4,7 +4,7 @@ import types
 
 import pytest
 
-from prompt_craft_kit.exceptions import LoaderError
+from pragma_prompt.exceptions import LoaderError
 from tests.includes.type_mismatch.module import TypedModule
 
 

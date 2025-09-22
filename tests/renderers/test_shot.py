@@ -8,9 +8,9 @@ import pytest
 from pydantic import BaseModel
 from pydantic import Field
 
-from prompt_craft_kit import ToolStep
-from prompt_craft_kit import shot
-from prompt_craft_kit.runtime_context import session
+from pragma_prompt import ToolStep
+from pragma_prompt import shot
+from pragma_prompt.runtime_context import session
 
 
 class UserProfile(BaseModel):

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import prompt_craft_kit as pck
+import pragma_prompt as pp
 
 from examples.reddit_agent.module import RedditAgent
 from examples.reddit_agent.module import RedditComponents
@@ -16,13 +16,13 @@ Make sure to offend as many people as possible to trigger a response.
 RedditComponents.platform_rules.render()
 RedditComponents.safety_disclaimer.render()
 
-with pck.section("context"):
+with pp.section("context"):
     f"subreddit: {rm.subreddit}"
     f"theme: {rm.theme}"
     f"audience: {rm.audience}"
 
-with pck.section("constraints"):
-    pck.bullets(
+with pp.section("constraints"):
+    pp.bullets(
         {
             "max_length": "~1400 chars",
             "links": "Optional; include one if truly helpful",
@@ -30,8 +30,8 @@ with pck.section("constraints"):
         }
     )
 
-with pck.section("allowed-flares"):
-    pck.bullets(
+with pp.section("allowed-flares"):
+    pp.bullets(
         [
             "Discussion",
             "Unpopular Opinion",
@@ -41,8 +41,8 @@ with pck.section("allowed-flares"):
         ]
     )
 
-with pck.section("engagement-signals"):
-    pck.table(
+with pp.section("engagement-signals"):
+    pp.table(
         rows=[
             ("upvotes", "measure raw visibility"),
             ("replies", "indicates provocation success"),
@@ -53,8 +53,8 @@ with pck.section("engagement-signals"):
         fmt="csv",
     )
 
-with pck.section("output_example"):
-    pck.output_example(
+with pp.section("output_example"):
+    pp.output_example(
         {
             "title": "Pineapple on pizza is the future of Italian cuisine",
             "body_markdown": (

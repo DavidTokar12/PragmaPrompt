@@ -6,8 +6,8 @@ from typing import Any
 import pandas as pd  # type: ignore[import-untyped]
 import pytest
 
-from prompt_craft_kit import table
-from prompt_craft_kit.runtime_context import session
+from pragma_prompt import table
+from pragma_prompt.runtime_context import session
 
 
 MAPPINGS_DATA = [

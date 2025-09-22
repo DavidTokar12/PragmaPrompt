@@ -2,10 +2,10 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from prompt_craft_kit import Component
-from prompt_craft_kit import ComponentModule
-from prompt_craft_kit import Prompt
-from prompt_craft_kit import PromptModule
+from pragma_prompt import Component
+from pragma_prompt import ComponentModule
+from pragma_prompt import Prompt
+from pragma_prompt import PromptModule
 
 
 @dataclass
@@ -30,20 +30,11 @@ class RedditReplyOutput:
 
 
 class RedditComponents(ComponentModule[None]):
-    """
-    Reusable building blocks for the Reddit agent.
-    Each attribute corresponds to a file in this directory.
-    """
-
     platform_rules: Component
     safety_disclaimer: Component
 
 
 class RedditAgent(PromptModule[None]):
-    """
-    Prompts for authoring threads and generating replies.
-    """
-
     write_post: Prompt[None, RedditRenderModel]
     write_replies: Prompt[None, RedditRenderModel]
 

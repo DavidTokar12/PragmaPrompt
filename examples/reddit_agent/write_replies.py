@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import prompt_craft_kit as pck
+import pragma_prompt as pp
 
 from examples.reddit_agent.module import RedditAgent
 from examples.reddit_agent.module import RedditComponents
@@ -18,14 +18,14 @@ RedditComponents.brand_voice.render()
 RedditComponents.platform_rules.render()
 
 
-with pck.section("context"):
+with pp.section("context"):
     f"subreddit: {ctx.subreddit}"
     f"theme: {ctx.theme}"
     f"audience: {ctx.audience}"
 
-pck.separator("REPLY EXAMPLES")
+pp.separator("REPLY EXAMPLES")
 
-pck.shot(
+pp.shot(
     user="User: 'This is obviously fake.'",
     thought="De-escalate, bring data if available, invite constructive chat.",
     output=(
@@ -33,13 +33,13 @@ pck.shot(
     ),
 )
 
-pck.shot(
+pp.shot(
     user="User: 'Tabs over spaces forever.'",
     output="I use both. Tabs for chaos, spaces for therapy. We can be friends.",
 )
 
-with pck.section("constraints"):
-    pck.kv(
+with pp.section("constraints"):
+    pp.kv(
         {
             "max_replies": 3,
             "style": "warm + concise",
@@ -47,9 +47,9 @@ with pck.section("constraints"):
         }
     )
 
-pck.separator("OUTPUT FORMAT")
+pp.separator("OUTPUT FORMAT")
 
-pck.output_format(
+pp.output_format(
     {
         "replies": [
             {
@@ -62,9 +62,9 @@ pck.output_format(
 )
 
 # Tiny explicit block usage (usually triple-quoted strings already cover this)
-pck.block("Return only the <replies> section below.")
+pp.block("Return only the <replies> section below.")
 
-with pck.section("replies"):
+with pp.section("replies"):
     """
     <reply>
       <text>...</text>

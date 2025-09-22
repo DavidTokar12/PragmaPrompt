@@ -4,8 +4,8 @@ from dataclasses import dataclass
 from enum import Enum
 from pathlib import Path
 
-from prompt_craft_kit import Prompt
-from prompt_craft_kit import PromptModule
+from pragma_prompt import Prompt
+from pragma_prompt import PromptModule
 
 
 class ReviewResult(str, Enum):

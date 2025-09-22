@@ -4,8 +4,8 @@ from pathlib import Path
 
 import pytest
 
-from prompt_craft_kit import Prompt
-from prompt_craft_kit import PromptModule
+from pragma_prompt import Prompt
+from pragma_prompt import PromptModule
 
 
 def test_base_module_path() -> None:
