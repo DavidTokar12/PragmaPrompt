@@ -3,6 +3,7 @@ from __future__ import annotations
 import pytest
 
 import pragma_prompt as pp
+
 from pragma_prompt.runtime_context import session
 
 
@@ -31,6 +32,5 @@ def test_output_example_unknown_comment_key_raises_value_error() -> None:
     data = {"title": "", "body_markdown": "", "flair": ""}
     comments = {"nonexistent": "should raise"}
 
-    with session():
-        with pytest.raises(ValueError):
-            pp.output_example(data, comments=comments)
+    with session(), pytest.raises(ValueError):
+        pp.output_example(data, comments=comments)

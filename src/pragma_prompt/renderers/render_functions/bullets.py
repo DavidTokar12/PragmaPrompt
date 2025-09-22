@@ -52,7 +52,7 @@ def bullets(
         return "\n".join(lines)
 
     # Guard: don't iterate characters of a string/bytes
-    if isinstance(items, (str, bytes)):
+    if isinstance(items, str | bytes):
         s = items.decode("utf-8", "replace") if isinstance(items, bytes) else items
         return f"- {to_display_block(s)}"
 

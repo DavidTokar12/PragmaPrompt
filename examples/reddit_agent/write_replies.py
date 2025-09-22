@@ -29,7 +29,7 @@ pp.shot(
     user="User: 'This is obviously fake.'",
     thought="De-escalate, bring data if available, invite constructive chat.",
     output=(
-        "I hear you—skepticism is healthy. I couldn’t verify the stat, so I left it out."
+        "I hear you—skepticism is healthy. I couldn't verify the stat, so I left it out."
     ),
 )
 

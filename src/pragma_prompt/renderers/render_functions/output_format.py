@@ -48,8 +48,8 @@ def output_format(
         payload = asdict(data)
     elif isinstance(data, Mapping):
         payload = dict(data)
-    elif hasattr(data, "model_dump") and callable(getattr(data, "model_dump")):
-        payload = cast(SupportsModelDump, data).model_dump()
+    elif hasattr(data, "model_dump") and callable(data.model_dump):
+        payload = cast("SupportsModelDump", data).model_dump()
     else:
         raise TypeError(
             "output_format expects one of: Mapping[str, JsonValue], a dataclass instance, "

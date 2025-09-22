@@ -90,7 +90,7 @@ def _normalize_from_csv_src(
     src: CsvLike, headers: Sequence[str] | None
 ) -> tuple[list[str], list[list[Any]]]:
     # Runtime isinstance checks must use tuples of types
-    if isinstance(src, (Path, PathLike)):
+    if isinstance(src, Path | PathLike):
         text = Path(src).read_text(encoding="utf-8")
     else:
         text = src
@@ -115,7 +115,7 @@ def _normalize(
     if _is_dataframe(rows):
         return _normalize_from_dataframe(cast("DfLike", rows), headers)
     # Use tuple for runtime isinstance and avoid redundant casts for mypy
-    if isinstance(rows, (str, Path, PathLike)):
+    if isinstance(rows, str | Path | PathLike):
         return _normalize_from_csv_src(rows, headers)
     seq = cast("Sequence[Any]", rows)
     if seq and isinstance(seq[0], Mapping):
@@ -170,7 +170,7 @@ def table(
 
     Notes:
         Runtime ``isinstance`` checks use tuples of types for compatibility.
-        PrettyTable is lazy‑imported.
+        PrettyTable is lazy-imported.
     """
     hdrs, matrix = _normalize(rows, headers)
 
