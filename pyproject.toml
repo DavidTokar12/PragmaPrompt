@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pragma-prompt"
-version = "0.1.2"
+version = "0.0.1"
 description = "A powerful toolkit for building, managing, and composing hierarchical prompts as code."
 authors = ["David Tokar <1413david@gmail.com>"]
 readme = "README.md"
