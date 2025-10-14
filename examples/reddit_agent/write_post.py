@@ -56,18 +56,17 @@ with pp.section("engagement-signals"):
 with pp.section("output_example"):
     pp.output_example(
         {
-            "title": "Pineapple on pizza is the future of Italian cuisine",
+            "title": "Hot take: every CS major should fail a class on purpose",
             "body_markdown": (
-                "Italians act like pineapple on pizza is cultural vandalism, "
-                "but let's be honest: it's actually gourmet. "
-                "The sweetness balances the salt, the texture pops, "
-                "and if you can't handle that, maybe you're just stuck in the past. "
-                "Try it before crying to your nonna."
+                "If you haven't bombed a class yet, you're not learning. "
+                "Recruiters trust resilience more than a 4.0 GPA. "
+                "Tank algorithms, brag about the growth arc, and you'll ace the vibe checks. "
+                "Stop flexing perfect transcripts and start flexing scar tissue."
             ),
-            "flair": "Unpopular Opinion",
+            "flair": "Discussion",
         },
         comments={
-            "title": "bold claim up front to trigger reactions",
-            "body_markdown": "target Italians directly, call pineapple 'gourmet', mock tradition to maximize replies",
+            "title": "bold provocation that drags in every overachiever",
+            "body_markdown": "call out perfectionism, push failure-as-flex narrative, keep it cocky + motivational",
         },
     )

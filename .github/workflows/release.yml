@@ -1,36 +1,38 @@
 name: Release
-
 on:
-    release:
-        types: [created]
-    
+  release:
+    types: [created]
+
+permissions:
+  contents: read
+  id-token: write  # needed for OIDC
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version-file: ".python-version"
 
-      - name: Install Poetry
-        uses: abatilo/actions-poetry@v3
+      - uses: abatilo/actions-poetry@v3
         with:
           poetry-version: "1.8.2"
 
-      - name: Configure Poetry
+      - name: Install project (no venv)
         run: |
           poetry config virtualenvs.create false
           poetry install --no-interaction --all-extras
 
-      - name: Build and publish
-        env:
-          POETRY_PYPI_TOKEN_PYPI: ${{ secrets.PYPI_API_TOKEN }}
-        run: |
-          poetry build
-          poetry publish
+      - name: Build dist
+        run: poetry build
+
+      # Official PyPI publish action (handles OIDC)
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist
+          # To publish to TestPyPI first, add:
+          # repository-url: https://test.pypi.org/legacy/

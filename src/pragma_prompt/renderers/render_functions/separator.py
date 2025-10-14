@@ -8,9 +8,7 @@ from pragma_prompt.renderers.render_function import render_function
 @overload
 def separator() -> str: ...
 @overload
-def separator(
-    title: str, *, char: str = "-", width: int = 8, boxed: bool = False
-) -> str: ...
+def separator(title: str, *, char: str = "-", width: int = 80) -> str: ...
 
 
 @render_function("separator")
@@ -19,28 +17,19 @@ def separator(
     *,
     char: str = "-",
     width: int = 80,
-    boxed: bool = False,
 ) -> str:
     """Render a visual divider line, optionally with a centered title.
 
     Args:
         title: Optional title to center within the divider.
         char: The character used to draw the divider line.
-        width: Target width of the divider; minimum is 3.
-        boxed: If True, draws a title line with a top and bottom divider.
+        width: Target width of the divider.
 
     Returns:
         The divider string.
     """
-    if width < 3:
-        width = 3
-
-    line = char * width
     if not title:
-        return line
+        return char * width
 
     title_with_padding = f" {title} "
-    centered = title_with_padding.center(width, char)
-    if boxed:
-        return f"{line}\n{centered}\n{line}"
-    return centered
+    return title_with_padding.center(width, char)

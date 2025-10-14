@@ -4,6 +4,7 @@ import pytest
 
 import pragma_prompt as pp
 
+from pragma_prompt.renderers.render_functions.output_format import CommentTree
 from pragma_prompt.runtime_context import session
 
 
@@ -115,7 +116,7 @@ def test_output_example_array_index_comment() -> None:
 
 def test_output_example_multiple_nested_comments() -> None:
     data = {"user": {"name": "Ada", "roles": ["admin", "ops"]}, "count": 2}
-    comments = {
+    comments: CommentTree = {
         "user": {
             "name": "Display name",
             "roles": {"0": "Primary role"},

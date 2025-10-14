@@ -13,6 +13,9 @@ class RedditRenderModel:
     subreddit: str
     theme: str
     audience: str
+    target_user: str = ""
+    bait_comment: str = ""
+    gaslight_hook: str = ""
 
 
 @dataclass
@@ -30,6 +33,7 @@ class RedditReplyOutput:
 
 
 class RedditComponents(ComponentModule[None]):
+    brand_voice: Component
     platform_rules: Component
     safety_disclaimer: Component
 
@@ -40,6 +44,8 @@ class RedditAgent(PromptModule[None]):
 
 
 if __name__ == "__main__":
-    with open("xd.txt", mode="w") as f:
-        rm = RedditRenderModel(subreddit="anal", theme="porn", audience="gooners")
+    with open("output.txt", mode="w") as f:
+        rm = RedditRenderModel(
+            subreddit="csMajors", theme="vibe coding", audience="new grads"
+        )
         f.write(RedditAgent.write_post.render(render_model=rm))

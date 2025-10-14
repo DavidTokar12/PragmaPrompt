@@ -11,7 +11,7 @@ from pragma_prompt.runtime_context import session
 CASES: list[tuple[dict[str, Any], str, str, str]] = [
     (
         {},
-        "Without a title, returns a line of 8 '-' characters.",
+        "Without a title, returns a line of 80 '-' characters.",
         "-" * 80,
         "no_args_default",
     ),
@@ -23,15 +23,9 @@ CASES: list[tuple[dict[str, Any], str, str, str]] = [
     ),
     (
         {"title": "CONTEXT"},
-        "Centers the title padded by '-' at default width 8.",
-        f"{'-'*35} CONTEXT {'-'*36}",
+        "Centers the title padded by '-' at default width 80.",
+        " CONTEXT ".center(80, "-"),
         "title_default",
-    ),
-    (
-        {"title": "BOX", "boxed": True, "char": "-", "width": 12},
-        "With boxed=True, wraps the centered title between full-width lines.",
-        "------------\n--- BOX ----\n------------",
-        "title_boxed",
     ),
     (
         {"title": "X", "char": "*", "width": 9},
@@ -40,10 +34,10 @@ CASES: list[tuple[dict[str, Any], str, str, str]] = [
         "title_custom_char",
     ),
     (
-        {"width": 2},  # clamped to minimum width 3
-        "Width < 3 is clamped up to 3.",
-        "---",
-        "clamp_width",
+        {"width": 2},
+        "Width can be less than 3.",
+        "--",
+        "width_less_than_3",
     ),
 ]
 

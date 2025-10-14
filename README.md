@@ -1,10 +1,12 @@
-# PragmaPrompt
+# PragmaPrompt: A toolkit for building, managing, and composing hierarchical prompts as Python code.
 
-## logo -> we need to make one first of crouse
 
-## badges -> ones that are easy, but look nice
+![License](https://img.shields.io/github/license/DavidTokar12/PragmaPrompt)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+![Type hints](https://img.shields.io/badge/types-PEP%20561-informational)
+[![codecov](https://codecov.io/gh/DavidTokar12/PragmaPrompt/branch/main/graph/badge.svg)](https://codecov.io/gh/DavidTokar12/PragmaPrompt)
 
-## A toolkit for building, managing, and composing hierarchical prompts as Python code.
+---
 
 * **Prompts as real Python (lint, test, type, ship).**
   Get linters, formatters, type checking, unit tests, imports, and refactors—the whole Python toolchain applied to your prompts.
@@ -15,7 +17,7 @@
 
 #
 
-```
+```python
 import pragma_prompt as pp
 from my_module import MyModule
 
@@ -29,7 +31,7 @@ if ctx.is_user_sad:
 else:
     "Show him some though love, he can handle it."
 
-with pck.section("user_data"):
+with pp.section("user_data"):
     f"The users name is: {rm.user_name}"
 ```
 
@@ -43,24 +45,161 @@ The users name is: John
 ```
 
 
-# docs
+# How It Works
 
-# Short explanation how the prompts ar built, and what to understand
+At its core, PragmaPrompt executes your prompts as Python files. This means you can use the full power of Python—loops, conditionals, functions, and imports—to dynamically construct your prompts. Any bare string literal is automatically captured and rendered as a normalized text block.
 
-here I want to basically metnion that this is true python code so:
+This approach turns prompt engineering into a familiar software development process. You can lint, test, and version your prompts just like any other code.
 
-for _ in range(10):
-    "Hello"
+```python
+# in my_prompts/daily_motivation.py
 
-will render 'Hello' 10 times.
+# Use a loop to repeat instructions
+for i in range(3):
+    f"Repetition {i+1}: Be concise and clear."
 
-# explain how to instantiate prompt modules
+# Use a conditional to change the prompt based on context
+if ctx.user_is_new:
+    "Explain the concepts simply."
+else:
+    "Assume the user is an expert."
+```
 
-# explain how to import components within prompts
+This will render:
+```
+Repetition 1: Be concise and clear.
+Repetition 2: Be concise and clear.
+Repetition 3: Be concise and clear.
+Assume the user is an expert.
+```
 
-# best practices
+## Defining and Using Prompts
 
-Awesome—starting small and sharp. Here’s a README-ready section for the first three renderers, plus quick notes on improving the docstrings.
+To get started, you define `PromptModule` and `ComponentModule` classes. These act as namespaces that organize your prompts and reusable components.
+
+### 1. Create a Prompt Module
+
+A `PromptModule` is a class that groups related prompts and provides them with shared constants.
+
+```python
+# in my_app/prompts.py
+from pathlib import Path
+import pragma_prompt as pp
+
+# (Optional) Define a class for shared constants
+class MyConstants:
+    default_tone = "helpful"
+    max_length = 1000
+
+# Create a module class
+class MyPrompts(pp.PromptModule):
+    # 1. Set the directory where your prompt files are located
+    module_dir = Path(__file__).parent / "prompt_files"
+    
+    # 2. (Optional) Attach your constants
+    constants = MyConstants()
+
+    # 3. Define your prompts
+    # PragmaPrompt will look for 'summarize.py' in your module_dir
+    summarize = pp.Prompt() 
+    
+    # You can also specify a different filename
+    translate = pp.Prompt("translate_text.py")
+```
+
+### 2. Write Your Prompt File
+
+Your prompt file is a standard Python file. You can access the prompt's `context` and `render_model` using a tuple assignment, and the module's `constants` via `pp.constants()`.
+
+```python
+# in prompt_files/summarize.py
+import pragma_prompt as pp
+
+# Get handles to context and render_model inside an active session
+ctx = MyPrompts.summarize.context
+rm = MyPrompts.summarize.render_model
+
+# Access constants from the module
+f"Your tone should be {pp.constants().default_tone}."
+
+# Access data from the context and render_model
+f"Summarize the following text for user {rm.user_id}:"
+f"{ctx.text_to_summarize}"
+```
+
+### 3. Render the Prompt
+
+To render the prompt, you call the `.render()` method on the prompt object, passing in the required `context` and `render_model` data.
+
+```python
+# in your application code
+from my_app.prompts import MyPrompts
+
+# The data you want to inject into the prompt
+class RenderData:
+    user_id = "user123"
+
+class ContextData:
+    text_to_summarize = "This is a long article..."
+
+prompt_text = MyPrompts.summarize.render(
+    context=ContextData(),
+    render_model=RenderData()
+)
+
+print(prompt_text)
+```
+
+## Composing Prompts with Components
+
+`Component`s are reusable snippets that can be imported into your prompts. They are ideal for standardizing instructions, formats, or examples.
+
+### 1. Create a Component Module
+
+Similar to a `PromptModule`, a `ComponentModule` organizes your reusable components.
+
+```python
+# in my_app/components.py
+from pathlib import Path
+import pragma_prompt as pp
+
+class MyComponents(pp.ComponentModule):
+    module_dir = Path(__file__).parent / "component_files"
+    
+    # This component will be loaded from 'output_format.py'
+    output_format = pp.Component()
+```
+
+### 2. Write Your Component File
+
+Component files are simpler than prompt files. They can access shared `constants` but do not have `context` or `render_model`.
+
+```python
+# in component_files/output_format.py
+import pragma_prompt as pp
+
+pp.warning("You must respond in JSON.")
+pp.output_example({"summary": "...", "tags": []})
+```
+
+### 3. Import and Use the Component in a Prompt
+
+You can import component modules directly into your prompt files and call the component's `.render()` method to insert its content.
+
+```python
+# in prompt_files/summarize.py
+import pragma_prompt as pp
+from my_app.components import MyComponents
+
+ctx, rm = pp.this_prompt()
+
+f"Summarize this text: {ctx.text_to_summarize}"
+
+# Render the component to include its content
+MyComponents.output_format.render()
+```
+
+When `MyPrompts.summarize` is rendered, the content of the `output_format` component will be included directly in the final output. This allows you to build complex prompts from standardized, reusable parts.
 
 
 # Renderers
@@ -243,7 +382,7 @@ pp.output_example(
 A string containing pretty JSON with inline `// comments`. The JSON structure is valid if you strip the `// …` parts.
 
 
-## `separator(...)` — visual divider (optional title/box)
+## `separator(...)` — visual divider (optional title)
 
 **Signature**
 
@@ -253,23 +392,17 @@ pp.separator(
     *,
     char: str = "-",
     width: int = 80,
-    boxed: bool = False,
 ) -> str
 ```
 
 **What it does**
-Draws a clean ASCII divider line. With a `title`, it centers the text and pads both sides. With `boxed=True`, it wraps the titled line between two full-width lines.
+Draws a clean ASCII divider line. With a `title`, it centers the text and pads both sides.
 
 **Rules & defaults**
 
-* `width` defaults to **80** and is **clamped to ≥ 3**.
+* `width` defaults to **80**.
 * `char` must be a single visible character; defaults to `"-"`.
-* When `title` is provided and `boxed=False`, emits a **single centered line**.
-* When `title` is provided and `boxed=True`, emits **three lines**:
-
-  1. full-width `char` line
-  2. centered `title` line (padded by `char`)
-  3. full-width `char` line
+* When `title` is provided, emits a **single centered line**.
 
 **Examples**
 
@@ -278,23 +411,20 @@ pp.separator()
 # "--------------------------------------------------------------------------------"  # 80 x "-"
 
 pp.separator(char="=", width=10)
-# "=========="  # 10 x "="
+# "=========="
 
 pp.separator(title="CONTEXT")
-# "----------------------------------- CONTEXT ------------------------------------"
-
-pp.separator(title="BOX", boxed=True, char="-", width=12)
-# "------------\n--- BOX ----\n------------"
+# "--------------------------------- CONTEXT ----------------------------------"
 
 pp.separator(title="X", char="*", width=9)
 # "*** X ***"
 
-pp.separator(width=2)  # clamped to 3
-# "---"
+pp.separator(width=2)
+# "--"
 ```
 
 **Returns**
-A single string (one or three lines depending on options).
+A single string.
 
 ---
 

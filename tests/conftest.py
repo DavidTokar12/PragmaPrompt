@@ -55,8 +55,10 @@ def results_path(artifacts_dir: Path) -> Path:
 
 @pytest.fixture(scope="session", autouse=True)
 def ensure_results_json(results_path: Path) -> None:
-    if not results_path.exists():
-        results_path.write_text("[]", encoding="utf-8")
+    # Always reset the artifact file at the start of a test session so
+    # previous runs don't leak state. This guarantees downstream readers see
+    # valid JSON instead of an empty or partially-written file.
+    results_path.write_text("[]", encoding="utf-8")
 
 
 def _json_serializer(obj: Any) -> Any:
@@ -146,7 +148,15 @@ def append_results(results_path: Path) -> Callable[[str, Review | None], None]:
 
     def _append(file: str, review: Review | None) -> None:
         raw = results_path.read_text(encoding="utf-8")
-        data = json.loads(raw)
+        if not raw.strip():
+            data = []
+        else:
+            try:
+                data = json.loads(raw)
+            except json.JSONDecodeError as exc:
+                raise RuntimeError(
+                    "results.json is unreadable or invalid (failed to decode JSON)"
+                ) from exc
         if not isinstance(data, list):
             raise RuntimeError("results.json is unreadable or invalid (not a list)")
 
