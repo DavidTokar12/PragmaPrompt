@@ -23,6 +23,8 @@ def test_multi_renderer_prompt() -> None:
     # Get the plan directly
     render_plan = MultiRendererPromptModule.multi_renderer_prompt.plan
 
+    assert render_plan is not None
+
     # Check expected order of renderers
     assert [call.renderer for call in render_plan.calls] == [
         "block",

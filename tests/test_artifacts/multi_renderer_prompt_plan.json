@@ -1,0 +1,131 @@
+{
+  "calls": [
+    {
+      "renderer": "block",
+      "callable_path": "pragma_prompt.renderers.render_functions.block.block",
+      "args": [],
+      "kwargs": {
+        "content": "\nThis prompt demonstrates using multiple renderers with different types.\n"
+      },
+      "result": "This prompt demonstrates using multiple renderers with different types."
+    },
+    {
+      "renderer": "block",
+      "callable_path": "pragma_prompt.renderers.render_functions.block.block",
+      "args": [],
+      "kwargs": {
+        "content": "\nWelcome to the test prompt!\n"
+      },
+      "result": "Welcome to the test prompt!"
+    },
+    {
+      "renderer": "section_start",
+      "callable_path": "pragma_prompt.renderers.sections.section_start",
+      "args": [
+        "table"
+      ],
+      "kwargs": {},
+      "result": "<TABLE>"
+    },
+    {
+      "renderer": "table",
+      "callable_path": "pragma_prompt.renderers.render_functions.table.table",
+      "args": [],
+      "kwargs": {
+        "headers": [
+          "Item",
+          "Value"
+        ],
+        "rows": [
+          [
+            "item1",
+            "✓"
+          ],
+          [
+            "item2",
+            "✓"
+          ],
+          [
+            "item3",
+            "✓"
+          ]
+        ]
+      },
+      "result": "+-------+-------+\n|  Item | Value |\n+-------+-------+\n| item1 |   ✓   |\n| item2 |   ✓   |\n| item3 |   ✓   |\n+-------+-------+"
+    },
+    {
+      "renderer": "section_end",
+      "callable_path": "pragma_prompt.renderers.sections.section_end",
+      "args": [
+        "table"
+      ],
+      "kwargs": {},
+      "result": "</TABLE>"
+    },
+    {
+      "renderer": "section_start",
+      "callable_path": "pragma_prompt.renderers.sections.section_start",
+      "args": [
+        "code"
+      ],
+      "kwargs": {},
+      "result": "<CODE>"
+    },
+    {
+      "renderer": "code",
+      "callable_path": "pragma_prompt.renderers.render_functions.code_block.code_block",
+      "args": [
+        "def process_items():\n    # Process items for test_user\n    items = ['item1', 'item2', 'item3']\n    return [item.upper() for item in items]"
+      ],
+      "kwargs": {
+        "lang": "python"
+      },
+      "result": "```python\ndef process_items():\n    # Process items for test_user\n    items = ['item1', 'item2', 'item3']\n    return [item.upper() for item in items]\n```"
+    },
+    {
+      "renderer": "section_end",
+      "callable_path": "pragma_prompt.renderers.sections.section_end",
+      "args": [
+        "code"
+      ],
+      "kwargs": {},
+      "result": "</CODE>"
+    },
+    {
+      "renderer": "section_start",
+      "callable_path": "pragma_prompt.renderers.sections.section_start",
+      "args": [
+        "block"
+      ],
+      "kwargs": {},
+      "result": "<BLOCK>"
+    },
+    {
+      "renderer": "block",
+      "callable_path": "pragma_prompt.renderers.render_functions.block.block",
+      "args": [
+        "Template: test_template"
+      ],
+      "kwargs": {},
+      "result": "Template: test_template"
+    },
+    {
+      "renderer": "block",
+      "callable_path": "pragma_prompt.renderers.render_functions.block.block",
+      "args": [
+        "Timestamp: 2025-09-22 20:48:59.716137"
+      ],
+      "kwargs": {},
+      "result": "Timestamp: 2025-09-22 20:48:59.716137"
+    },
+    {
+      "renderer": "section_end",
+      "callable_path": "pragma_prompt.renderers.sections.section_end",
+      "args": [
+        "block"
+      ],
+      "kwargs": {},
+      "result": "</BLOCK>"
+    }
+  ]
+}

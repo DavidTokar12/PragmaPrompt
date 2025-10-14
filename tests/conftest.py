@@ -166,11 +166,10 @@ def llm_review(
     """
     LLM review using OpenAI structured output.
     - Returns Review when --llm-review is enabled.
-    - Returns None when --llm-review is not enabled.
     - Raises on any API/parse error when enabled (no silent failures).
     """
     enabled: bool = bool(request.config.getoption("--llm-review"))
-    model: str = str(request.config.getoption("--llm-model"))
+    model: str = str(request.config.getoption("--llm-model") or "gpt-4.1")
 
     class _ReviewModel(BaseModel):
         result: ReviewResult
@@ -198,9 +197,6 @@ def llm_review(
             expectation=expectation,
             output=output,
         )
-
-        with open("user.txt", "w") as f:
-            f.write(ReviewModule.review_user.render(render_model=render_model))
 
         completion = client.chat.completions.parse(
             model=model,

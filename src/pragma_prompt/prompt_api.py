@@ -14,7 +14,7 @@ from typing import get_type_hints
 from pragma_prompt.exceptions import ConfigurationError
 from pragma_prompt.render_engine import render_path
 from pragma_prompt.render_engine import render_path_in_current_session
-from pragma_prompt.renderers.render_plan import RenderCall
+from pragma_prompt.renderers.render_plan import RenderPlan
 from pragma_prompt.runtime_context import context as rt_context
 from pragma_prompt.runtime_context import is_in_session
 from pragma_prompt.runtime_context import join_sections as rt_join
@@ -33,13 +33,14 @@ class _BaseItem:
     Handles owner/attr/filename/path resolution.
     """
 
-    __slots__ = ("_attr", "_file_path", "_filename", "_owner")
+    __slots__ = ("_attr", "_file_path", "_filename", "_last_render_plan", "_owner")
 
     def __init__(self, filename: str | None = None) -> None:
         self._filename = filename
         self._attr: str | None = None
         self._file_path: Path | None = None
         self._owner: type[_BaseModule[Any]] | None = None
+        self._last_render_plan: RenderPlan | None = None
 
     def _late_init(self, owner: type[_BaseModule[Any]], attr_name: str) -> None:
         """Called by the module's __init_subclass__ to bind this item to its owner."""
@@ -81,6 +82,11 @@ class _BaseItem:
         if self._file_path is None:
             raise ConfigurationError("Item has no file path.")
         return self._file_path
+
+    @property
+    def plan(self) -> RenderPlan | None:
+        """Get the last render plan, or None if render hasn't been called."""
+        return self._last_render_plan
 
 
 def _is_item_annotation(tp: Any) -> bool:
@@ -175,7 +181,6 @@ class Prompt(_BaseItem, Generic[CtxT, RM]):
 
     def __init__(self, filename: str | None = None) -> None:
         super().__init__(filename)
-        self._last_render_plan: list[RenderCall] | None = None
 
     @property
     def context(self) -> CtxT:
@@ -184,11 +189,6 @@ class Prompt(_BaseItem, Generic[CtxT, RM]):
     @property
     def render_model(self) -> RM:
         return cast("RM", rt_render_model())
-
-    @property
-    def plan(self) -> list[RenderCall] | None:
-        """Get the last render plan, or None if render hasn't been called."""
-        return self._last_render_plan
 
     def __iter__(self) -> Iterator[object]:
         yield self.context
@@ -237,12 +237,6 @@ class Component(_BaseItem):
 
     def __init__(self, filename: str | None = None) -> None:
         super().__init__(filename)
-        self._last_render_plan: list[RenderCall] | None = None
-
-    @property
-    def plan(self) -> list[RenderCall] | None:
-        """Get the last render plan, or None if render hasn't been called."""
-        return self._last_render_plan
 
     def render(self) -> str:
         """

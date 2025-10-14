@@ -9,7 +9,7 @@ from pragma_prompt.renderers.render_function import render_function
 def separator() -> str: ...
 @overload
 def separator(
-    title: str, *, char: str = "-", width: int = 80, boxed: bool = False
+    title: str, *, char: str = "-", width: int = 8, boxed: bool = False
 ) -> str: ...
 
 
