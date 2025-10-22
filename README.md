@@ -100,17 +100,15 @@ class MyContext:
 class MyComponents(pp.ComponentModule[None]):
     module_dir = Path(__file__).parent / "component_files"
 
-    output_format: pp.Component[MyRenderModel] = pp.Component()
+    output_format: pp.Component[MyRenderModel]
 
 
 class MyPrompts(pp.PromptModule[MyConstants]):
     module_dir = Path(__file__).parent / "prompt_files"
     constants = MyConstants()
 
-    daily_motivation: pp.Prompt[MyContext, MyRenderModel] = pp.Prompt(
-        "daily_motivation.py"
-    )
-    summarize: pp.Prompt[MyContext, MyRenderModel] = pp.Prompt("summarize.py")
+    daily_motivation: pp.Prompt[MyContext, MyRenderModel]
+    summarize: pp.Prompt[MyContext, MyRenderModel]
 ```
 
 ### 2. Write Your Prompt File
@@ -198,7 +196,7 @@ class MyComponents(pp.ComponentModule):
     module_dir = Path(__file__).parent / "component_files"
     
     # This component will be loaded from 'output_format.py'
-    output_format: pp.Component[MyRenderModel] = pp.Component()
+    output_format: pp.Component[MyRenderModel]
 ```
 
 ### 2. Write Your Component File
