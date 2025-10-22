@@ -174,9 +174,6 @@ if __name__ == "__main__":
 
 > ⚠️ When you call `.render(...)` from module scope, guard it with `if __name__ == "__main__":` to avoid importing the same module recursively during rendering.
 
-### Typed data all the way through
-
-`Prompt` and `Component` descriptors are fully generic: in `MyPrompts`, `summarize` is a `Prompt[ContextData, RenderData]`, while `MyComponents.output_format` is a `Component[MyRenderModel]`. When you access `MyPrompts.summarize.context`, `MyPrompts.summarize.render_model`, or `MyPrompts.constants`, those helpers return the concrete types you declared. Static analyzers such as MyPy or Pyright can therefore catch mismatches in your context, render model, or shared constants before you ever run a render.
 
 ## Composing Prompts with Components
 
