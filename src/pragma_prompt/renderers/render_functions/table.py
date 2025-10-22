@@ -146,7 +146,7 @@ def table(
     rows: RowsLike,
     *,
     headers: Sequence[str] | None = None,
-    fmt: TableFormat = "pretty",
+    fmt: TableFormat = "csv",
 ) -> str:
     """Render a small table from mappings, row sequences, a pandas-like DataFrame, or CSV.
 

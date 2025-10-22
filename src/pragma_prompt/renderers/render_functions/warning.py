@@ -26,15 +26,16 @@ def warning(
     level: DangerLevel = 1,
     title: str | None = None,
 ) -> str:
-    """Render a warning with escalating emphasis using XML-style tags.
+    """Render a warning block with escalating emphasis using XML-style tags.
 
     Levels:
-        1 → ``<WARNING>…</WARNING>``
-        2 → ``<IMPORTANT-WARNING>…</IMPORTANT-WARNING>``
-        3 → ``<CRITICAL-WARNING>…</CRITICAL-WARNING>`` (prepends a hard-requirement line)
+        1 → ``<NOTICE>…</NOTICE>``
+        2 → ``<WARNING>…</WARNING>``
+        3 → ``<CONSTRAINT>…</CONSTRAINT>``
 
     Args:
-        body: Warning text or displayable content.
+        body: Warning text or displayable content (string, mapping, dataclass, model,
+            or nested list of those types).
         level: Severity level (1, 2, or 3).
         title: Optional title prepended to the message.
 
@@ -48,16 +49,13 @@ def warning(
         raise ValueError("warning.level must be 1, 2, or 3")
 
     payload = body if isinstance(body, str) else to_display_block(body)
+
+    tag_by_level = {
+        1: "NOTICE",
+        2: "WARNING",
+        3: "CONSTRAINT",
+    }
+    tag = tag_by_level[level]
     header = f"{title}: " if title else ""
 
-    if level == 1:
-        tag = "WARNING"
-        return f"<{tag}>\n{header}{payload}\n</{tag}>"
-    if level == 2:
-        tag = "IMPORTANT-WARNING"
-        return f"<{tag}>\n{header}{payload}\n</{tag}>"
-
-    # level == 3
-    tag = "CRITICAL-WARNING"
-    instruction = "HARD REQUIREMENT: You must follow the instruction below exactly."
-    return f"<{tag}>\n{instruction}\n{header}{payload}\n</{tag}>"
+    return f"<{tag}>\n{header}{payload}\n</{tag}>"

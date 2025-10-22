@@ -77,7 +77,7 @@ def shot(
     *,
     title: str | None = None,
     context: LlmResponseLike | None = None,
-    user: str,
+    user: str | None = None,
     input: LlmResponseLike | None = None,  # Back-compat alias
     tools: Sequence[ToolStep] = (),
     thought: str | None = None,
@@ -88,7 +88,8 @@ def shot(
     Args:
         title: Optional heading for the example.
         context: Optional context block.
-        user: The user message (plain string is fine).
+        user: Optional user message (plain string is fine). When ``None``, the user block
+            is omitted.
         input: Deprecated alias of ``model_input``; kept for backward compatibility.
         tools: Zero or more tool steps that were executed.
         thought: Optional chain-of-thought style comment (if you deliberately include it).
@@ -102,7 +103,8 @@ def shot(
     if title:
         main_parts.append(f"### {title}")
 
-    main_parts.append(f"User: {user}")
+    if user is not None:
+        main_parts.append(f"User: {user}")
 
     if context is not None:
         main_parts.append(_render_tagged_block("context", context))

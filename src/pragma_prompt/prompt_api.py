@@ -229,38 +229,49 @@ class ComponentModule(_BaseModule[CnsT], Generic[CnsT]):
     """
 
 
-class Component(_BaseItem):
+class Component(_BaseItem, Generic[RM]):
     """
     Descriptor/handle for a reusable component snippet.
-    Components are constants-only snippets; they do not expose context or render_model.
+    Components are constants-only snippets; they do not expose prompt context but can
+    read the active render model, mirroring prompt files.
     """
 
     def __init__(self, filename: str | None = None) -> None:
         super().__init__(filename)
 
-    def render(self) -> str:
+    @property
+    def render_model(self) -> RM:
+        """Access the current render model (if any) while inside a render session."""
+        return cast("RM", rt_render_model())
+
+    def render(self, render_model: RM | None = None) -> str:
         """
         If called during an active prompt render, execute the component into the
         current session (appending the component's sections in-order) and return
         just the text that was added by this call.
 
-        If called with no active session, render standalone using only module
-        constants and return the full text.
+        If called with no active session, render standalone using module constants
+        and an optional ``render_model`` (mirroring prompt rendering), returning the
+        full text.
         """
         owner = self._ensure_owner()
         path = self._ensure_path()
 
-        try:
+        if is_in_session():
+            if render_model is not None:
+                raise RuntimeError(
+                    "Cannot override render_model while inside an active render session."
+                )
             before_len = len(rt_render_plan())
             render_path_in_current_session(path)
             # Note: In session mode we can't get the plan since it's part of the parent's plan
             return rt_join(from_index=before_len)
-        except RuntimeError:
-            result = render_path(
-                path,
-                constants=getattr(owner, "constants", None),
-                context=None,
-                render_model=None,
-            )
-            self._last_render_plan = result.plan
-            return result.text
+
+        result = render_path(
+            path,
+            constants=getattr(owner, "constants", None),
+            context=None,
+            render_model=render_model,
+        )
+        self._last_render_plan = result.plan
+        return result.text

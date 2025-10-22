@@ -26,4 +26,5 @@ class SupportsModelDump(Protocol):
     def model_dump(self, *args: Any, **kwargs: Any) -> JsonObj: ...
 
 
-LlmResponseLike: TypeAlias = JsonObj | BaseModel | DataclassInstance | str
+BaseResponseLike: TypeAlias = JsonObj | BaseModel | DataclassInstance | str
+LlmResponseLike: TypeAlias = BaseResponseLike | Sequence["LlmResponseLike"]

@@ -33,9 +33,9 @@ class RedditReplyOutput:
 
 
 class RedditComponents(ComponentModule[None]):
-    brand_voice: Component
-    platform_rules: Component
-    safety_disclaimer: Component
+    brand_voice: Component[RedditRenderModel]
+    platform_rules: Component[RedditRenderModel]
+    safety_disclaimer: Component[RedditRenderModel]
 
 
 class RedditAgent(PromptModule[None]):

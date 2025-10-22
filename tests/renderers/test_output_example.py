@@ -4,7 +4,7 @@ import pytest
 
 import pragma_prompt as pp
 
-from pragma_prompt.renderers.render_functions.output_format import CommentTree
+from pragma_prompt.renderers.render_functions.output_example import CommentTree
 from pragma_prompt.runtime_context import session
 
 

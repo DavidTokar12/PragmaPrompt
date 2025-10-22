@@ -11,8 +11,8 @@ from pragma_prompt.runtime_context import session
 CASES: list[tuple[dict[str, Any], str, str, str]] = [
     (
         {"body": "The system is overheating.", "level": 1},
-        "A level 1 warning should use a simple <WARNING> tag with newline-wrapped content.",
-        "<WARNING>\nThe system is overheating.\n</WARNING>",
+        "A level 1 warning should use a <NOTICE> tag with newline-wrapped content.",
+        "<NOTICE>\nThe system is overheating.\n</NOTICE>",
         "level_1_default_tag",
     ),
     (
@@ -21,20 +21,21 @@ CASES: list[tuple[dict[str, Any], str, str, str]] = [
             "level": 2,
             "title": "Expiration Notice",
         },
-        "A level 2 warning should use an <IMPORTANT-WARNING> tag with a title and newline-wrapped content.",
-        "<IMPORTANT-WARNING>\nExpiration Notice: API keys will expire in 24 hours.\n</IMPORTANT-WARNING>",
+        "A level 2 warning should use a <WARNING> tag with a title and newline-wrapped content.",
+        "<WARNING>\nExpiration Notice: API keys will expire in 24 hours.\n</WARNING>",
         "level_2_custom_title_tag",
     ),
     (
         {"body": "Do not output any personal identifying information.", "level": 3},
-        "A level 3 warning should use a <CRITICAL-WARNING> tag with a hard requirement and newline-wrapped content.",
-        (
-            "<CRITICAL-WARNING>\n"
-            "HARD REQUIREMENT: You must follow the instruction below exactly.\n"
-            "Do not output any personal identifying information.\n"
-            "</CRITICAL-WARNING>"
-        ),
+        "A level 3 warning should use a <CONSTRAINT> tag with newline-wrapped content.",
+        "<CONSTRAINT>\nDo not output any personal identifying information.\n</CONSTRAINT>",
         "level_3_critical_tag",
+    ),
+    (
+        {"body": ["alpha", "beta"], "level": 1},
+        "Structured bodies such as lists should be rendered as pretty JSON inside the <NOTICE> tag.",
+        '<NOTICE>\n[\n  "alpha",\n  "beta"\n]\n</NOTICE>',
+        "structured_list_body",
     ),
 ]
 

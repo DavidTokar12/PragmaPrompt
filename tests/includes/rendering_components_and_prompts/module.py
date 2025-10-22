@@ -7,8 +7,8 @@ from pragma_prompt import PromptModule
 
 
 class ImportComponentModule(ComponentModule[None]):
-    component_1: Component
-    component_2: Component
+    component_1: Component[None]
+    component_2: Component[None]
 
 
 class ImportPromptModule(PromptModule[None]):

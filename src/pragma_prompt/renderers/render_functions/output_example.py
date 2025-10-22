@@ -14,6 +14,7 @@ from pydantic import BaseModel
 
 from pragma_prompt.renderers.render_function import render_function
 
+
 # ============================================================
 # Comments: recursively nested Mapping[str, str | Mapping]
 #   - Each object node EITHER has a single string comment OR per-subkey comments (mapping), not both.
@@ -287,13 +288,3 @@ def output_example(
     node = _build_node(payload, comments)
 
     return "\n".join(node.render(indent=0))
-
-
-def output_format(
-    data: Any,
-    *,
-    comments: CommentTreeOrStr | None = None,
-) -> str:
-    """Backward-compatible wrapper around output_example."""
-
-    return output_example(data, comments=comments)

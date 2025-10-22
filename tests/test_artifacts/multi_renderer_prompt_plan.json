@@ -51,7 +51,7 @@
           ]
         ]
       },
-      "result": "+-------+-------+\n|  Item | Value |\n+-------+-------+\n| item1 |   ✓   |\n| item2 |   ✓   |\n| item3 |   ✓   |\n+-------+-------+"
+      "result": "Item,Value\r\nitem1,✓\r\nitem2,✓\r\nitem3,✓"
     },
     {
       "renderer": "section_end",
@@ -113,10 +113,10 @@
       "renderer": "block",
       "callable_path": "pragma_prompt.renderers.render_functions.block.block",
       "args": [
-        "Timestamp: 2025-10-14 07:56:55.250310"
+        "Timestamp: 2025-10-22 22:42:04.617826"
       ],
       "kwargs": {},
-      "result": "Timestamp: 2025-10-14 07:56:55.250310"
+      "result": "Timestamp: 2025-10-22 22:42:04.617826"
     },
     {
       "renderer": "section_end",

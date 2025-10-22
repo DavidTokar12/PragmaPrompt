@@ -52,5 +52,3 @@ output = Review(
     ),
     formatting_rating=5,
 )
-
-pp.output_format(data=output)

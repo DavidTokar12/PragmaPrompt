@@ -39,10 +39,9 @@ CASES = [
     # Case 1: Minimal shot with only required arguments
     (
         {
-            "user": "What is the capital of Switzerland?",
             "output": "Bern",
         },
-        "This is a minimal prompt shot with only a user message and a string output. Review the basic formatting for simplicity and clarity.",
+        "This is a minimal prompt shot with only the required output block. Review how the renderer behaves when no explicit user message is supplied.",
         "minimal_shot",
     ),
     # Case 2: Shot with added Context and structured Input

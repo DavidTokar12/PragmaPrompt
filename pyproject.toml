@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pragma-prompt"
-version = "0.0.1"
+version = "0.0.2"
 description = "A powerful toolkit for building, managing, and composing hierarchical prompts as code."
 authors = ["David Tokar <1413david@gmail.com>"]
 readme = "README.md"
@@ -50,6 +50,8 @@ openai = "^1.102.0"
 dotenv = "^0.9.9"
 pytest-asyncio = "^1.1.0"
 pandas = "^2.3.2"
+cogapp = "^3.6.0"
+cog = "^0.16.8"
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]

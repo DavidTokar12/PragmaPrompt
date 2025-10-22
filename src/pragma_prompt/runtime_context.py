@@ -42,6 +42,7 @@ class _State(Generic[CnsT, CtxT, RmT]):
 _VAR: contextvars.ContextVar[_State[Any, Any, Any] | None] = contextvars.ContextVar(
     "pck_runtime", default=None
 )
+_ALLOW_RENDERERS = contextvars.ContextVar("pck_allow_renderers", default=False)
 
 
 def begin(
@@ -59,7 +60,9 @@ def begin(
         context=context,
         render_model=render_model,
     )
-    return _VAR.set(state)
+    token = _VAR.set(state)
+    _ALLOW_RENDERERS.set(False)
+    return token
 
 
 def end(token: contextvars.Token[_State[Any, Any, Any] | None]) -> None:
@@ -127,6 +130,18 @@ def context() -> Any:
 
 def render_model() -> Any | None:
     return _state().render_model
+
+
+def _allow_renderer_outside_prompt() -> None:
+    """
+    Opt-in escape hatch for tooling: permit renderers to run without an active session.
+    Scoped to the current context/thread via ContextVar.
+    """
+    _ALLOW_RENDERERS.set(True)
+
+
+def _renderer_outside_prompt_allowed() -> bool:
+    return _ALLOW_RENDERERS.get()
 
 
 # -------- sections API (unchanged) --------
