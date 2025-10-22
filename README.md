@@ -310,9 +310,8 @@ pp.code_block("print('hi')", 'python')
 
 ```python
 pp.output_example(
-    data: JsonObj | BaseModel | DataclassInstance | SupportsModelDump | None,
-    *,
-    comments: str | Mapping[str, str | Mapping] | None = None,
+    data: LlmResponseLike,
+    comments: CommentTreeOrStr | None = None,
 ) -> str
 ```
 
@@ -451,13 +450,13 @@ A single string.
 ```python
 pp.shot(
     *,
-    user: str | None = None,
-    output: Any,
     title: str | None = None,
-    context: Any | None = None,
-    input: Any | None = None,
-    tools: list[ToolStep] | None = None,
+    context: LlmResponseLike | None = None,
+    user: str | None = None,
+    input: LlmResponseLike | None = None,
+    tools: Sequence[ToolStep] = (),
     thought: str | None = None,
+    output: LlmResponseLike,
 ) -> str
 ```
 
@@ -478,11 +477,11 @@ Emits a compact, **readable “example shot”**: the user prompt, optional cont
 
 ```python
 ToolStep(
-    name: str,
-    rationale: str,
-    input: Any,          # dict/dataclass/Pydantic also supported
-    output: Any,         # dict/dataclass/Pydantic also supported
-    thought: str | None = None,
+    name: str
+    rationale: str | None = None
+    input: LlmResponseLike | None = None
+    output: LlmResponseLike | None = None
+    thought: str | None = None
 )
 ```
 
@@ -653,10 +652,11 @@ A single string with all sections rendered in a stable, LLM-friendly layout.
 **Overloads**
 
 ```python
-pp.table(rows: Sequence[Mapping[str, Any]], *, headers: Sequence[str] | None = None, fmt: Literal["pretty","csv"] = "csv") -> str
-pp.table(rows: Sequence[Sequence[Any]],     *, headers: Sequence[str] | None = None, fmt: Literal["pretty","csv"] = "csv") -> str
-pp.table(rows: PandasLikeDataFrame,         *, headers: Sequence[str] | None = None, fmt: Literal["pretty","csv"] = "csv") -> str
-pp.table(rows: str | Path | PathLike[str],  *, headers: Sequence[str] | None = None, fmt: Literal["pretty","csv"] = "csv") -> str
+pp.table(
+    rows: RowsLike,
+    headers: Sequence[str] | None = None,
+    fmt: TableFormat = "csv",
+) -> str
 ```
 
 **What it does**

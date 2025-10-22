@@ -144,7 +144,6 @@ def table(
 @render_function("table")
 def table(
     rows: RowsLike,
-    *,
     headers: Sequence[str] | None = None,
     fmt: TableFormat = "csv",
 ) -> str:

@@ -14,7 +14,7 @@ class ToolStep:
 
     name: str
     rationale: str | None = None
-    input: LlmResponseLike | None = None  # (RENAME: clearer than 'input')
+    input: LlmResponseLike | None = None
     output: LlmResponseLike | None = None
     thought: str | None = None
 
@@ -78,7 +78,7 @@ def shot(
     title: str | None = None,
     context: LlmResponseLike | None = None,
     user: str | None = None,
-    input: LlmResponseLike | None = None,  # Back-compat alias
+    input: LlmResponseLike | None = None,
     tools: Sequence[ToolStep] = (),
     thought: str | None = None,
     output: LlmResponseLike,

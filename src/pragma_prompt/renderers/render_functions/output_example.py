@@ -13,6 +13,7 @@ from typing import cast
 from pydantic import BaseModel
 
 from pragma_prompt.renderers.render_function import render_function
+from pragma_prompt.renderers.types import LlmResponseLike
 
 
 # ============================================================
@@ -257,8 +258,7 @@ def _build_node(
 
 @render_function("output_example")
 def output_example(
-    data: Any,
-    *,
+    data: LlmResponseLike,
     comments: CommentTreeOrStr | None = None,
 ) -> str:
     """
