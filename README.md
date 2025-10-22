@@ -228,6 +228,7 @@ MyComponents.output_format.render()
 ```
 
 When `MyPrompts.summarize` is rendered, the content of the `output_format` component will be included directly in the final output. This allows you to build complex prompts from standardized, reusable parts.
+
 -----
 
 # Renderers
