@@ -28,6 +28,7 @@ import pragma_prompt as pp
 
 from examples.getting_started.prompts import MyPrompts
 
+# typed context and render model
 ctx = MyPrompts.daily_motivation.context
 rm = MyPrompts.daily_motivation.render_model
 
@@ -120,7 +121,7 @@ Your prompt file is a standard Python file. You can access the prompt's `context
 from examples.getting_started.prompts import MyComponents
 from examples.getting_started.prompts import MyPrompts
 
-# Get typed handles to context and render_model inside an active session
+# Get typed handles to context, render_model and constants inside an active session
 ctx = MyPrompts.summarize.context
 rm = MyPrompts.summarize.render_model
 constants = MyPrompts.constants
@@ -187,7 +188,6 @@ Similar to a `PromptModule`, a `ComponentModule` organizes your reusable compone
 # in my_app/components.py
 from pathlib import Path
 import pragma_prompt as pp
-from my_app.models import MyRenderModel
 
 class MyComponents(pp.ComponentModule):
     module_dir = Path(__file__).parent / "component_files"
